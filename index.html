@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plano de Kegel</title>
+  <link rel="preload" as="video" href="kling_intro_compressed.mp4" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f5f5;
+      color: #111;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 12px 12px 40px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+    }
+
+    /* Progress bar */
+    .progress-wrap {
+      margin-bottom: 28px;
+    }
+    .progress-label {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 8px;
+    }
+    .progress-bar {
+      height: 6px;
+      background: #e0e0e0;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #1a6fa5, #2d8dd6);
+      border-radius: 99px;
+      transition: width 0.4s ease;
+    }
+
+    /* Card */
+    .card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 24px 20px 96px;
+      animation: fadeIn 0.35s ease;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .badge {
+      display: inline-block;
+      background: #dbeeff;
+      color: #1a6fa5;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 99px;
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      font-size: 19px;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 8px;
+      color: #111;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #777;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    /* Options */
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .option {
+      background: #fff;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 13px 16px;
+      cursor: pointer;
+      font-size: 15px;
+      color: #333;
+      transition: all 0.2s;
+      text-align: left;
+    }
+    .option:hover {
+      border-color: #2d8dd6;
+      background: #eaf4fd;
+      color: #111;
+    }
+    .option.selected {
+      border-color: #1a6fa5;
+      background: #dbeeff;
+      color: #1a6fa5;
+      font-weight: 600;
+    }
+
+    /* Scale */
+    .scale-wrap {
+      margin-bottom: 24px;
+    }
+    .scale-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 12px;
+    }
+    .scale-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+    .scale-btn {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      border: 2px solid #e0e0e0;
+      background: #fff;
+      color: #333;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .scale-btn:hover {
+      border-color: #2d8dd6;
+      background: #f0f7ff;
+    }
+    .scale-btn.selected {
+      border-color: #1a6fa5;
+      background: linear-gradient(135deg, #1a6fa5, #2d8dd6);
+      color: #fff;
+    }
+
+    /* Info card */
+    .info-box {
+      background: #f0f7ff;
+      border-left: 4px solid #2d8dd6;
+      border-radius: 10px;
+      padding: 16px 18px;
+      margin-bottom: 24px;
+      font-size: 14px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    /* Stat highlight */
+    .stat-big {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .stat-big .number {
+      font-size: 64px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #1a6fa5, #2d8dd6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+    .stat-big .desc {
+      font-size: 15px;
+      color: #777;
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+
+    /* Reviews */
+    .reviews {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .review {
+      background: #fafafa;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      padding: 14px 16px;
+    }
+    .review .stars { color: #f59e0b; font-size: 13px; margin-bottom: 4px; }
+    .review .author { font-size: 12px; color: #999; margin-bottom: 6px; }
+    .review .text { font-size: 13px; color: #555; line-height: 1.5; }
+
+    /* Result */
+    .result-box {
+      background: #fafafa;
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      margin-bottom: 24px;
+      color: #111;
+      border: 1px solid #888;
+    }
+    .result-box .goal { font-size: 14px; color: #555; margin-bottom: 8px; }
+    .result-box .deadline { font-size: 22px; font-weight: 700; margin-bottom: 4px; color: #111; }
+    .result-box .sub { font-size: 13px; color: #666; }
+    .compat {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 14px;
+      justify-content: center;
+    }
+    .compat .label { font-size: 13px; color: #555; }
+    .compat .value { font-size: 14px; font-weight: 700; color: #16a34a; }
+
+    /* Benefits list */
+    .benefits {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .benefits li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      color: #333;
+    }
+    .benefits li::before {
+      content: "✓";
+      width: 24px;
+      height: 24px;
+      background: #dbeeff;
+      color: #1a6fa5;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* Button */
+    .btn {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #1a6fa5, #2d8dd6);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+    .btn:hover { opacity: 0.9; }
+    .btn:active { transform: scale(0.98); }
+    .btn-pulse {
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(192,57,43,0.5); }
+      50% { transform: scale(1.03); box-shadow: 0 0 0 10px rgba(192,57,43,0); }
+    }
+    .btn-pulse-green {
+      animation: pulse-green 1.8s ease-in-out infinite;
+    }
+    @keyframes pulse-green {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(45,141,214,0.5); }
+      50% { transform: scale(1.03); box-shadow: 0 0 0 10px rgba(45,141,214,0); }
+    }
+    .btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Loading screen */
+    .loading-screen {
+      text-align: center;
+      padding: 48px 28px;
+    }
+    .loading-spinner {
+      width: 56px;
+      height: 56px;
+      border: 4px solid #eee;
+      border-top-color: #1a6fa5;
+      border-radius: 50%;
+      animation: spin 0.9s linear infinite;
+      margin: 0 auto 32px;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .loading-phrase {
+      font-size: 18px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 10px;
+      min-height: 28px;
+      transition: opacity 0.4s;
+    }
+    .loading-bar {
+      height: 6px;
+      background: #e0e0e0;
+      border-radius: 99px;
+      overflow: hidden;
+      margin-top: 28px;
+    }
+    .loading-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #1a6fa5, #2d8dd6);
+      border-radius: 99px;
+      width: 0%;
+      transition: width 1.2s ease;
+    }
+
+    .note {
+      font-size: 11px;
+      color: #bbb;
+      text-align: center;
+      margin-top: 14px;
+    }
+
+    /* Intro screen */
+    .intro-screen {
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      animation: fadeIn 0.35s ease;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+    }
+    .intro-logo {
+      display: block;
+      max-height: 70px;
+      margin: 24px auto 16px;
+      object-fit: contain;
+    }
+    .intro-img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16/9;
+      max-height: 300px;
+      object-position: center 30%;
+      object-fit: cover;
+    }
+    .intro-benefits-img {
+      display: block;
+      margin: 0 auto;
+    }
+    .intro-body {
+      padding: 16px 20px 24px;
+      text-align: center;
+    }
+    .intro-title {
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1.35;
+      text-align: center;
+      padding: 16px 20px 8px;
+      color: #111;
+    }
+    .intro-title span { color: #1a6fa5; }
+    .intro-sub { font-size: 15px; color: #444; line-height: 1.6; text-align: center; padding: 0 8px 16px; }
+    .intro-age-label {
+      font-size: 16px;
+      font-weight: 600;
+      color: #111;
+      margin-bottom: 14px;
+      text-align: left;
+    }
+  @media (max-width: 480px) {
+    .btn {
+      font-size: 14px !important;
+      padding: 14px 12px !important;
+      letter-spacing: 0.02em !important;
+      border-radius: 12px;
+    }
+  }
+  @media (min-width: 600px) {
+    .result-headline {
+      font-size: 32px !important;
+      letter-spacing: -0.02em;
+      line-height: 1.2 !important;
+    }
+  }
+  </style>
+  <script>
+    window.pixelId = "69b8416a91c7354667caf08d";
+    var a = document.createElement("script");
+    a.setAttribute("async", "");
+    a.setAttribute("defer", "");
+    a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+    document.head.appendChild(a);
+  </script>
+  <script
+    src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+    data-utmify-prevent-xcod-sck
+    data-utmify-prevent-subids
+    async
+    defer
+  ></script>
+</head>
+<body>
+<div id="stickyBtn" style="display:none; position:fixed; bottom:0; left:0; right:0; padding:12px 20px 20px; background:transparent; z-index:999;">
+  <button class="btn" id="stickyBtnInner" style="max-width:480px; margin:0 auto; display:block;" onclick="stickyNext()">Continuar</button>
+  <p id="stickySubtext" style="display:none; text-align:center; font-size:12px; color:#888; margin-top:8px; max-width:480px; margin-left:auto; margin-right:auto;">Garantia 90 dias • Acesso imediato • R$29,90</p>
+</div>
+
+<div class="container">
+  <div style="text-align:center; margin-bottom:16px;">
+    <img id="globalLogo" src="BR_logo_white_bg.webp" alt="Logo" width="160" height="60" style="max-height:60px; object-fit:contain;" />
+  </div>
+  <div class="progress-wrap" id="progressWrap" style="display:none;">
+    <div class="progress-label" id="progressLabel">Pergunta 1 de 8</div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:5%"></div></div>
+  </div>
+  <div id="card"><div class="intro-screen">
+    <h1 class="intro-title">A Cura Permanente Para <span>Disfunção Erétil</span> <span style="color:#111;">é Gratuita</span> — Por Isso a Indústria do Viagra Fatura <span>R$4 Bilhões</span> Garantindo Que Você <span>Nunca</span> Descubra Isso</h1>
+    <p class="intro-sub">Existe um músculo que, quanto mais forte, mais dura e mais firme a ereção — com resultados equivalentes ao remédio, sem tomar um único comprimido. Responda 4 perguntas e descubra se o seu ainda pode ser recuperado.</p>
+    <video class="intro-img" src="kling_intro_compressed.mp4" poster="poster_intro.jpg" autoplay loop muted playsinline preload="auto" style="width:100%; border-radius:12px;"></video>
+    <div class="intro-body">
+      <button class="btn" style="width:100%; font-size:16px; padding:16px 24px; letter-spacing:0.05em; background:linear-gradient(135deg,#1a6fa5,#2d8dd6);" onclick="nextStep()">Iniciar o teste →</button>
+      <div style="display:flex; justify-content:center; margin-top:16px;">
+        <img class="intro-benefits-img" src="BR_benefits_anonimo.webp" alt="100% anônimo" width="375" height="189" loading="lazy" style="width:auto; height:auto; max-width:160px;" />
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<script>
+  const _saved = JSON.parse(sessionStorage.getItem("quizState") || "null");
+  const answers = (_saved && _saved.answers) ? _saved.answers : {};
+  const ageOptions = ["25–35", "35–45", "45–55", "55+"];
+
+  const steps = [
+    { type: "intro" },
+    { type: "choice", id: "age", question: "Quantos anos você tem?", options: ["25–35", "35–45", "45–55", "55+"] },
+    { type: "choice", id: "goal", question: "Sua ereção falha na hora H?", options: ["Quase sempre — tá difícil manter", "Às vezes falha sem motivo aparente", "Fica dura mas cai rápido demais", "Ainda funciona, mas não é como antes"] },
+    {
+      type: "info", id: "info1",
+      badge: "",
+      title: "A ereção começa nos músculos", hidetitle: true, darkbg: true,
+      pretitle: `<span style="color:#fff;">A <span style="text-decoration:underline;">Qualidade da Ereção</span> depende da força dos</span> <span style="color:#22c55e;">Músculos do Assoalho Pélvico (MAP)</span>`,
+      body: "<strong style='color:#fff; text-decoration:underline;'>Ereção fraca</strong> é músculo fraco. Simples assim. Quando você fortalece os <strong style='color:#fff; text-decoration:underline;'>músculos internos</strong> certos, o sangue para de vazar e sua ereção fica <strong style='color:#fff; text-decoration:underline;'>mais dura, mais grossa</strong> e você dura muito mais tempo na cama. Com os exercícios Kegel, <strong style='color:#fff; text-decoration:underline;'>qualquer homem consegue isso.</strong>",
+      video: "video_ED_s1.mp4", videoPoster: "poster_video_ED.webp",
+    },
+    { type: "choice", id: "erection_quality", question: "Como o estresse do dia a dia está afetando sua vida sexual?", options: ["O cansaço me deixa sem energia e sem vontade", "Chego animado mas brocho na hora — meu corpo não acompanha", "Chego tão esgotado que evito qualquer situação sexual", "Ainda não afetou, mas não quero descobrir da pior forma"] },
+    { type: "choice", id: "relationship_impact", question: "Você já tentou resolver seu desempenho sexual de alguma forma?", options: ["Sim, tomei remédio mas não quero depender disso", "Tentei mudar alimentação e exercício mas não adiantou", "Nunca tentei — não sabia por onde começar", "Ainda não tentei mas estou pronto pra mudar isso agora"] },
+    {
+      type: "info", id: "info2",
+      darkbg: true,
+      badge: "✔ Fato científico",
+      title: "Exercícios de Kegel funcionam", hidetitle: true,
+      pretitle: `<span style="color:#fff;">Com <span style="text-decoration:underline;">apenas 5 minutos por dia</span> os <span style="text-decoration:underline;">Exercícios Kegel</span> fortalecem os Músculos do Assoalho Pélvico, o que melhora efetivamente a sua</span> <span style="color:#22c55e;">Ereção e a Resistência</span>`,
+      pretitleSub: "O resultado aparece rápido: mais dureza, mais duração e controle total na hora H. Sem remédio. Sem efeito colateral. Só resultado.",
+      pretitleImg: "BR_img_erection_kegels_nokegels.avif",
+      body: "O problema é que <strong style='color:#fff; text-decoration:underline;'>9 em cada 10 homens</strong> que tentam fazer sozinhos estão fazendo errado — Sem saber qual músculo ativar, qual sequência seguir e qual frequência usar. É por isso que criamos o <strong style='color:#22c55e;'>Plano Kegel personalizado</strong> pra você. Com base nas suas respostas, você recebe o <strong style='color:#22c55e;'>direcionamento certo</strong> — pra fazer do jeito certo desde o primeiro dia, e começar a sentir a diferença na <strong style='color:#fff; text-decoration:underline;'>primeira semana.</strong>",
+      reviews: [
+        { author: "Marcelo", age: "36 anos", photo: "RnPtYZBFTrFNmgnyoNbfN3lvoRORgf_Qx3jouVU8lPF4ap6As4PUUR0IdLircMqtWbb81GPGipjIx9YRl0Diil3EunUvk2mb_x16OrFOjDRTBP3_LM6QEtiOD1K9cE2y_zKPI4nDCYAWjVglPnlucrAgGJxI0vtq3NnkuHQL9TA8ELToBbf3JGpi9qprr8yI.jpg.webp", text: "Após 4 semanas de exercícios de Kegel, não tenho mais problemas para obter e manter uma ereção. Se você está com dificuldades como eu estava, experimente estes exercícios." },
+      ]
+    },
+    { type: "gencta" },
+    { type: "generating" },
+    { type: "midresult" },
+    { type: "result" },
+  ];
+
+  let current = (_saved && _saved.current != null) ? _saved.current : 0;
+  const totalQuestions = steps.filter(s => s.type === "choice" || s.type === "scale").length;
+
+  function getQuestionIndex() {
+    let count = 0;
+    for (let i = 0; i < current; i++) {
+      if (steps[i].type === "choice" || steps[i].type === "scale") count++;
+    }
+    return count;
+  }
+
+  function updateProgress() {
+    const step = steps[current];
+    const wrap = document.getElementById("progressWrap");
+    const label = document.getElementById("progressLabel");
+    const fill = document.getElementById("progressFill");
+
+    if (step.type === "result" || step.type === "intro" || step.type === "loading" || step.type === "midresult" || step.type === "generating" || step.type === "gencta") {
+      wrap.style.display = "none";
+      return;
+    }
+
+    wrap.style.display = "block";
+    const pct = Math.round((current / (steps.length - 1)) * 100);
+    fill.style.width = Math.max(pct, 5) + "%";
+
+    if (step.type === "info") {
+      label.textContent = "Curiosidade";
+    } else {
+      label.textContent = `Pergunta ${getQuestionIndex() + 1} de ${totalQuestions}`;
+    }
+  }
+
+  function renderStep() {
+    const step = steps[current];
+    const card = document.getElementById("card");
+    card.className = "card";
+    card.style.background = "";
+    card.style.color = "";
+    document.body.style.background = "";
+    document.getElementById("globalLogo").src = "BR_logo_white_bg.webp";
+    updateProgress();
+    updateStickyBtn();
+
+    if (step.type === "intro") {
+      card.className = "";
+      card.innerHTML = `
+        <div class="intro-screen">
+          <h1 class="intro-title">A Cura Permanente Para <span>Disfunção Erétil</span> <span style="color:#111;">é Gratuita</span> — Por Isso a Indústria do Viagra Fatura <span>R$4 Bilhões</span> Garantindo Que Você <span>Nunca</span> Descubra Isso</h1>
+    <p class="intro-sub">Existe um músculo que, quanto mais forte, mais dura e mais firme a ereção — com resultados equivalentes ao remédio, sem tomar um único comprimido. Responda 4 perguntas e descubra se o seu ainda pode ser recuperado.</p>
+          <video class="intro-img" src="kling_intro_compressed.mp4" poster="poster_intro.jpg" autoplay loop muted playsinline preload="auto" style="width:100%; border-radius:12px;"></video>
+          <div class="intro-body">
+            <button class="btn" style="width:100%; font-size:16px; padding:16px 24px; letter-spacing:0.05em; background:linear-gradient(135deg,#1a6fa5,#2d8dd6);" onclick="nextStep()">Iniciar o teste →</button>
+            <div style="text-align:center; margin-top:16px;">
+              <img class="intro-benefits-img" src="BR_benefits_anonimo.webp" alt="100% anônimo" width="375" height="189" loading="lazy" style="width:auto; height:auto; max-width:160px;" />
+            </div>
+          </div>
+        </div>
+      `;
+      return;
+    }
+
+    if (step.type === "choice") {
+      card.innerHTML = `
+        <div class="badge">Pergunta ${getQuestionIndex() + 1}</div>
+        <h2>${step.question}</h2>
+        <div class="subtitle">Selecione uma opção abaixo</div>
+        <div class="options">
+          ${step.options.map((o, i) => `
+            <button class="option${answers[step.id] === i ? ' selected' : ''}" onclick="selectOption('${step.id}', ${i})">${o}</button>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    else if (step.type === "scale") {
+      card.innerHTML = `
+        <div class="badge">Pergunta ${getQuestionIndex() + 1}</div>
+        <h2>${step.question}</h2>
+        <div class="subtitle">Avalie de 1 a 5</div>
+        <div class="scale-wrap">
+          <div class="scale-labels"><span>${step.labelLeft}</span><span>${step.labelRight}</span></div>
+          <div class="scale-buttons">
+            ${[1,2,3,4,5].map(n => `
+              <button class="scale-btn${answers[step.id] === n ? ' selected' : ''}" onclick="selectScale('${step.id}', ${n})">${n}</button>
+            `).join("")}
+          </div>
+        </div>
+      `;
+    }
+
+    else if (step.type === "info") {
+      if (step.darkbg) {
+        card.style.background = "#000";
+        card.style.color = "#fff";
+        document.body.style.background = "#000";
+        document.getElementById("globalLogo").src = "BR_logo_dark_bg.webp";
+      } else {
+        card.style.background = "";
+        card.style.color = "";
+        document.body.style.background = "";
+        document.getElementById("globalLogo").src = "BR_logo_white_bg.webp";
+      }
+      const reviewsHtml = (step.reviews || []).map(r => `
+        <div class="review" style="${step.darkbg ? 'background:#2a2a2a; border:none; color:#fff;' : ''}">
+          ${r.photo ? `
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
+            <img src="${r.photo}" alt="${r.author}" style="width:48px; height:48px; border-radius:50%; object-fit:cover; flex-shrink:0;" />
+            <div>
+              <div style="font-weight:700; font-size:14px; color:#fff;">${r.author}</div>
+              ${r.age ? `<div style="font-size:12px; color:#aaa;">${r.age}</div>` : ""}
+              <div class="stars" style="font-size:13px;">★★★★★</div>
+            </div>
+          </div>
+          ` : `
+          <div class="stars">★★★★★</div>
+          <div class="author" style="${step.darkbg ? 'color:#aaa;' : ''}">${r.author}</div>
+          `}
+          <div class="text" style="${step.darkbg ? 'color:#ddd;' : ''}">${r.text}</div>
+        </div>
+      `).join("");
+
+      const statHtml = step.stat ? `
+        <div class="stat-big">
+          <div class="number">${step.stat}</div>
+          <div class="desc">${step.statDesc}</div>
+        </div>
+      ` : "";
+
+      card.innerHTML = `
+        ${step.badge ? `<div style="${step.darkbg ? 'text-align:center; margin-bottom:0;' : ''}"><div class="badge" style="${step.darkbg ? 'background:#1a6fa5; color:#fff; display:inline-block; padding:3px 10px; border-radius:6px; font-size:11px;' : ''}">${step.badge}</div></div>` : ""}
+        ${step.pretitle ? `<p style="font-size:17px; font-weight:700; color:${step.darkbg ? '#ccc' : '#888'}; margin-bottom:8px; line-height:1.5; text-align:center;">${step.pretitle}</p>` : ""}
+        ${step.pretitleSub ? `<p style="font-size:14px; color:${step.darkbg ? '#aaa' : '#666'}; margin-bottom:16px; line-height:1.5; text-align:center;">${step.pretitleSub}</p>` : ""}
+        ${step.pretitleImg ? `<img src="${step.pretitleImg}" style="width:100%; aspect-ratio:16/9; border-radius:12px; margin-bottom:16px;" />` : ""}
+        ${step.title && !step.hidetitle ? `<h2>${step.title}</h2>` : ""}
+        ${step.video ? `<video src="${step.video}" ${step.videoPoster ? `poster="${step.videoPoster}"` : ""} autoplay loop muted playsinline preload="auto" style="width:100%; border-radius:12px; margin:16px 0;"></video>` : ""}
+        <div class="info-box" style="${step.darkbg ? 'background:transparent; border:none; color:#ccc; text-align:center;' : ''}">${step.body}</div>
+        ${statHtml}
+        ${reviewsHtml ? `<div class="reviews">${reviewsHtml}</div>` : ""}
+      `;
+    }
+
+    else if (step.type === "gencta") {
+      document.getElementById("globalLogo").src = "BR_logo_white_bg.webp";
+      card.innerHTML = `
+        <div style="text-align:center; padding:16px 0;">
+          <div style="display:inline-flex; align-items:center; gap:6px; background:#2478b5; color:#e8f4fd; font-size:12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; padding:7px 16px; border-radius:99px; margin-bottom:20px;">
+            ✦ ANÁLISE CONCLUÍDA
+          </div>
+          <h2 style="font-size:22px; font-weight:800; color:#111; line-height:1.35; margin-bottom:12px;">Suas respostas foram analisadas com sucesso</h2>
+          <p style="font-size:14px; color:#555; line-height:1.7; margin-bottom:32px;">Com base no seu perfil, é possível criar um protocolo de exercícios Kegel 100% personalizado para o seu caso.</p>
+          <button class="btn" style="width:100%; font-size:16px; font-weight:800; padding:18px 24px; letter-spacing:0.04em; background:linear-gradient(135deg,#1a6fa5,#2d8dd6);" onclick="nextStep()">Gerar um Protocolo</button>
+          <p style="font-size:12px; color:#999; margin-top:12px;">100% gratuito • Sem compromisso</p>
+        </div>
+      `;
+    }
+
+    else if (step.type === "generating") {
+      document.getElementById("globalLogo").src = "BR_logo_white_bg.webp";
+      card.innerHTML = `
+        <div style="text-align:center; padding:16px 0;">
+          <div style="display:inline-flex; align-items:center; gap:6px; background:#2478b5; color:#e8f4fd; font-size:12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; padding:7px 16px; border-radius:99px; margin-bottom:24px;">
+            ⚙️ GERANDO SEU PROTOCOLO
+          </div>
+          <h2 style="font-size:20px; font-weight:800; color:#111; line-height:1.4; margin-bottom:8px;">Analisando suas respostas e<br>criando seu protocolo personalizado...</h2>
+          <p style="font-size:13px; color:#777; margin-bottom:32px;">Isso leva apenas alguns segundos</p>
+
+          <div style="display:flex; flex-direction:column; gap:16px; margin-bottom:32px; text-align:left;">
+            <div style="display:flex; align-items:center; gap:12px;" id="gen-step-1">
+              <div style="width:28px; height:28px; border-radius:50%; background:#eee; display:flex; align-items:center; justify-content:center; font-size:13px; flex-shrink:0;" id="gen-icon-1">⏳</div>
+              <span style="font-size:14px; color:#555;">Identificando seu perfil muscular...</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px;" id="gen-step-2">
+              <div style="width:28px; height:28px; border-radius:50%; background:#eee; display:flex; align-items:center; justify-content:center; font-size:13px; flex-shrink:0;" id="gen-icon-2">⏳</div>
+              <span style="font-size:14px; color:#555;">Calculando frequência ideal de treino...</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px;" id="gen-step-3">
+              <div style="width:28px; height:28px; border-radius:50%; background:#eee; display:flex; align-items:center; justify-content:center; font-size:13px; flex-shrink:0;" id="gen-icon-3">⏳</div>
+              <span style="font-size:14px; color:#555;">Montando sequência de exercícios...</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px;" id="gen-step-4">
+              <div style="width:28px; height:28px; border-radius:50%; background:#eee; display:flex; align-items:center; justify-content:center; font-size:13px; flex-shrink:0;" id="gen-icon-4">⏳</div>
+              <span style="font-size:14px; color:#555;">Finalizando protocolo personalizado...</span>
+            </div>
+          </div>
+
+          <div style="background:#e5e5e5; border-radius:99px; height:8px; overflow:hidden; margin-bottom:8px;">
+            <div id="genFill" style="height:100%; width:0%; background:linear-gradient(90deg,#1a6fa5,#2d8dd6); border-radius:99px; transition:width 0.6s ease;"></div>
+          </div>
+          <p id="genPct" style="font-size:13px; color:#888;">0%</p>
+        </div>
+      `;
+
+      const steps_gen = [
+        { id: 1, pct: 25 },
+        { id: 2, pct: 55 },
+        { id: 3, pct: 80 },
+        { id: 4, pct: 100 },
+      ];
+      let gi = 0;
+      function runGenStep() {
+        if (gi >= steps_gen.length) {
+          setTimeout(() => nextStep(), 600);
+          return;
+        }
+        const s = steps_gen[gi];
+        const icon = document.getElementById("gen-icon-" + s.id);
+        const fill = document.getElementById("genFill");
+        const pct = document.getElementById("genPct");
+        if (icon) icon.textContent = "✅";
+        if (fill) fill.style.width = s.pct + "%";
+        if (pct) pct.textContent = s.pct + "%";
+        gi++;
+        setTimeout(runGenStep, 1200);
+      }
+      setTimeout(runGenStep, 800);
+    }
+
+    else if (step.type === "loading") {
+      card.innerHTML = `
+        <div class="loading-screen">
+          <div class="loading-spinner"></div>
+          <div class="loading-phrase" id="loadingPhrase">Analisando suas respostas...</div>
+          <div class="loading-bar"><div class="loading-bar-fill" id="loadingFill"></div></div>
+        </div>
+      `;
+      const phrases = [
+        "Analisando suas respostas...",
+        "Calculando nível de compatibilidade...",
+        "Criando plano personalizado...",
+        "Quase pronto..."
+      ];
+      const fill = document.getElementById("loadingFill");
+      const phraseEl = document.getElementById("loadingPhrase");
+      let i = 0;
+      fill.style.width = "20%";
+      const interval = setInterval(() => {
+        i++;
+        if (i < phrases.length) {
+          phraseEl.style.opacity = "0";
+          setTimeout(() => {
+            phraseEl.textContent = phrases[i];
+            phraseEl.style.opacity = "1";
+          }, 300);
+          fill.style.width = ((i + 1) / phrases.length * 100) + "%";
+        } else {
+          clearInterval(interval);
+          setTimeout(() => nextStep(), 600);
+        }
+      }, 1400);
+    }
+
+    else if (step.type === "midresult") {
+      card.style.background = "#000";
+      card.style.color = "#fff";
+      document.body.style.background = "#000";
+      document.getElementById("globalLogo").src = "BR_logo_dark_bg.webp";
+      card.innerHTML = `
+        <div style="text-align:center; margin-bottom:24px;">
+          <h2 style="font-size:22px; font-weight:800; line-height:1.35; margin-bottom:16px; color:#fff;">Identificamos o problema — e a boa notícia é que <span style="color:#22c55e;">tem solução</span></h2>
+          <p style="font-size:14px; color:#ccc; line-height:1.7; margin-bottom:16px;">Com base nas suas respostas, seu corpo está mandando <strong style="color:#fff;">sinais claros de alerta</strong>. Ignorar isso vai piorar com o tempo — mas reverter é mais <strong style="color:#fff;">simples do que você imagina.</strong> Sem remédio, sem efeito colateral.</p>
+          <img src="BR_img_erection_84.webp" alt="" width="800" height="450" style="width:100%; height:auto; border-radius:12px; margin-bottom:12px;" />
+          <p style="font-size:14px; color:#ccc; line-height:1.7; margin-bottom:16px; text-align:center;">O problema nunca foi falta de solução. Foi falta do <strong style="color:#fff;">diagnóstico certo.</strong><br><br>Você acabou de dar o passo que a maioria nunca dá. E os números provam: <strong style="color:#fff; font-weight:900;">84%</strong> dos homens que seguiram esse protocolo reverteram a disfunção erétil <strong style="color:#fff;">sem depender de remédio nenhum.</strong></p>
+          <div style="background:#1a1a1a; border:1px solid #888; border-radius:14px; padding:18px 20px; margin-bottom:24px;">
+            <p style="font-size:14px; color:#ccc; line-height:1.6;">Homens que identificaram esse padrão cedo conseguiram recuperar a performance em <strong style="color:#22c55e;">menos de 2 semanas.</strong></p>
+          </div>
+        </div>
+      `;
+    }
+
+    else if (step.type === "result") {
+      const age = ageOptions[answers["age"]] || ageOptions[0];
+      const goalIdx = answers["goal"];
+      const goals = ["Melhorar a função erétil", "Melhorar o controle da ejaculação", "Maximizar o bem-estar sexual", "Aprimorar ambos os itens"];
+      const goal = goals[goalIdx != null ? goalIdx : 3];
+
+      card.innerHTML = `
+        <div style="text-align:center; margin-bottom:20px;">
+          <div style="display:inline-flex; align-items:center; gap:6px; background:#2478b5; color:#e8f4fd; font-size:12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; padding:7px 16px; border-radius:99px; margin-bottom:18px; border:1px solid #a9cce3;">
+            <span>✦</span> Seu plano está pronto!
+          </div>
+          <h2 class="result-headline" style="font-size:22px; font-weight:800; line-height:1.35; text-align:center; margin-bottom:12px;"><span style="color:#1a6fa5;">Ereção fraca</span> e <span style="color:#1a6fa5;">ejaculação precoce</span> têm a mesma causa: um músculo atrofiado.<br><span style="font-size:17px; font-weight:600; color:#555;">Não é doença. É falta de treino específico.</span></h2>
+          <p style="font-size:16px; font-weight:800; color:#111; text-align:center; line-height:1.6; margin-bottom:4px;">O Protocolo P5 corrige isso. 5 exercícios. 5 minutos por dia.</p>
+          <p style="font-size:14px; color:#666; text-align:center; line-height:1.6;">Baseado no mesmo princípio da reabilitação clínica masculina — feito em casa, <strong style="color:#111;">sem ninguém saber.</strong></p>
+          <button class="btn btn-pulse-green" style="margin-top:20px; letter-spacing:0.05em; font-size:15px; padding:16px 24px; background:linear-gradient(135deg,#1a6fa5,#2d8dd6);" onclick="document.getElementById('mainPricingBlock').scrollIntoView({behavior:'smooth', block:'center'});">ACESSAR O PROTOCOLO P5 →</button>
+          <p style="font-size:12px; color:#aaa; margin-top:8px; font-weight:700;">Garantia 90 dias • Acesso imediato</p>
+        </div>
+
+        <video src="BR_video_graph_pp2.mp4" poster="poster_video_graph.webp" autoplay loop muted playsinline preload="auto" style="width:100%; border-radius:12px; margin-bottom:16px;"></video>
+
+        <div class="stat-big">
+          <div class="number">87%</div>
+          <div class="desc">dos homens com seu perfil sentiram resultado em até 5 semanas.<br><strong style="color:#111;">Não é promessa. É fisiologia.</strong></div>
+        </div>
+
+        <p style="font-size:15px; font-weight:700; color:#111; margin-bottom:12px;">O que muda na prática:</p>
+        <ul class="benefits">
+          <li>Ereção mais dura e consistente</li>
+          <li>Controle total da ejaculação</li>
+          <li>Ela vai notar a diferença</li>
+        </ul>
+
+        <div id="mainPricingBlock" style="background:#fafafa; border-radius:16px; padding:24px 20px; text-align:center; margin-bottom:24px; border:1px solid #888;">
+          <p style="font-size:15px; font-weight:800; color:#111; line-height:1.4; margin-bottom:12px;">⚡ Você está a um clique de recuperar<br>sua performance de verdade</p>
+          <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:6px;">
+            <span style="font-size:16px; color:#999; text-decoration:line-through;">R$ 67,00</span>
+            <span style="background:#2d8dd6; color:#fff; font-size:12px; font-weight:700; padding:3px 10px; border-radius:99px;">55% OFF</span>
+          </div>
+          <p style="font-size:14px; color:#555; margin-bottom:2px;">por apenas</p>
+          <p style="margin-bottom:8px;"><span style="font-size:22px; font-weight:800; color:#111;">R$</span><span style="font-size:52px; font-weight:900; color:#111; line-height:1;">29</span><span style="font-size:22px; font-weight:800; color:#111;">,90</span></p>
+          <p style="font-size:13px; color:#888; margin-bottom:16px;">Menos de R$ 1,00 por dia pra voltar a ser o homem que ela quer</p>
+          <button id="mainCta" class="btn btn-pulse-green" style="width:100%; letter-spacing:0.05em; font-size:15px; padding:16px 24px; margin-bottom:10px; background:linear-gradient(135deg,#1a6fa5,#2d8dd6);" onclick="window.location.href='https://checkout.g4agency.com.br/VCCL1O8SCVWV'">ACESSAR O PROTOCOLO P5 →</button>
+          <p style="font-size:12px; color:#666; font-weight:600;">✓ Garantia 90 dias &nbsp;•&nbsp; ✓ Acesso vitalício</p>
+        </div>
+
+        <p style="font-size:15px; font-weight:700; color:#111; margin-bottom:12px;">O que homens como você estão dizendo:</p>
+        <div class="reviews">
+          <div class="review">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
+              <img src="p31miASLTvNE7rc2swRex3s_-e-sMus6ODmHlPoDQiqsnfn-cvrnjF-AOqecsof_MzaErO_Pjms6Kxx7rxO5iEKOnnLaVVR0B9vf2mLB-gfgEUafROkXFYo-PdDmA9JEK_4DS9vWLXGode4oooz9tpsuSrZczrE9RZrI1pvHlMu8Qz9O2s79FHlfoxfpuhpF.jpg.webp" alt="Fernando" width="48" height="48" loading="lazy" style="width:48px; height:48px; border-radius:50%; object-fit:cover; object-position:center 20%; flex-shrink:0;" />
+              <div>
+                <div style="font-weight:700; font-size:14px; color:#111;">Fernando</div>
+                <div style="font-size:12px; color:#999;">27 anos</div>
+                <div class="stars" style="font-size:13px;">★★★★★</div>
+              </div>
+            </div>
+            <div class="text">Segui este plano de exercícios de Kegel e agora meu desempenho está no auge. Pessoal, isso realmente faz a diferença, não percam essa oportunidade.</div>
+          </div>
+          <div class="review">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
+              <img src="1-TkMgsj9-q0IkB4o-oHXcZz1NmZshBT6Dgjoas3B1HNnqmBZY3aktOmk9DUqmxH4ykBZcSpl4espjOLS6waxDhk_hfELwYDFa99TOESZgak2Kg0b3zGC7ty4Ys0eKvgjnsqEFXUn_MxP_-_WwQhYFX5J9Fui8SpxeU9VEbMgHQETdDtkAdd8eIMBdjJdSi1.jpg.webp" alt="Joelson" width="48" height="48" loading="lazy" style="width:48px; height:48px; border-radius:50%; object-fit:cover; object-position:center 40%; flex-shrink:0;" />
+              <div>
+                <div style="font-weight:700; font-size:14px; color:#111;">Joelson</div>
+                <div style="font-size:12px; color:#999;">51 anos</div>
+                <div class="stars" style="font-size:13px;">★★★★★</div>
+              </div>
+            </div>
+            <div class="text">Ao chegar aos 50 anos, pensei que meus melhores dias tinham acabado. Mas graças ao Kegel, me sinto como se tivesse 20 anos de novo!</div>
+          </div>
+          <div class="review">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
+              <img src="U54dY153_vlwBDLULwO3EZriH58d5kgUfSejCrbg2S_XEJ6nU8FQaNVtANgNEBY0_bRWaXmQeZgz-iTCXAaQDZX7glX6_H-wTXaDFLiDYhAkeFW06q-pl1lc2_t9pARDmTEgT7gLycdeI5e5suUZ6xgIXob65pQMpyzZ-xC2wWzBbOCFzlWhRWWHHDxaW0vQ.jpg.webp" alt="Edson" width="48" height="48" loading="lazy" style="width:48px; height:48px; border-radius:50%; object-fit:cover; object-position:center 20%; flex-shrink:0;" />
+              <div>
+                <div style="font-weight:700; font-size:14px; color:#111;">Edson</div>
+                <div style="font-size:12px; color:#999;">42 anos</div>
+                <div class="stars" style="font-size:13px;">★★★★★</div>
+              </div>
+            </div>
+            <div class="text">Estou fazendo exercícios de Kegel há duas semanas e realmente aumentei minha resistência, me sinto mais confiante com minha parceira. Você também deveria experimentar os exercícios de Kegel.</div>
+          </div>
+        </div>
+
+        <div style="background:#fafafa; border-radius:16px; padding:20px; display:flex; align-items:center; gap:16px; margin-bottom:16px; border:1px solid #888;">
+          <img src="garantia-90-dias.webp" alt="Garantia 90 dias" width="128" height="128" loading="lazy" style="flex-shrink:0; width:64px; height:64px; object-fit:contain;" />
+          <div style="text-align:left;">
+            <p style="font-size:15px; font-weight:800; color:#111; margin-bottom:6px;">Garantia de 90 Dias de Devolução</p>
+            <p style="font-size:12px; color:#555; line-height:1.5; margin-bottom:6px;">Se em 90 dias você não estiver satisfeito com os resultados, devolvemos 100% do seu dinheiro. Sem perguntas, sem burocracia.</p>
+            <p style="font-size:13px; font-weight:700; color:#2d8dd6;">Risco zero. Resultados garantido.</p>
+          </div>
+        </div>
+
+        <div style="background:#fafafa; border-radius:16px; padding:24px 20px; text-align:center; margin-top:8px; margin-bottom:16px; border:1px solid #888;">
+          <p style="font-size:15px; font-weight:800; color:#111; line-height:1.4; margin-bottom:12px;">⚡ Você está a um clique de recuperar<br>sua performance de verdade</p>
+          <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:6px;">
+            <span style="font-size:16px; color:#999; text-decoration:line-through;">R$ 67,00</span>
+            <span style="background:#2d8dd6; color:#fff; font-size:12px; font-weight:700; padding:3px 10px; border-radius:99px;">55% OFF</span>
+          </div>
+          <p style="font-size:14px; color:#555; margin-bottom:2px;">por apenas</p>
+          <p style="margin-bottom:8px;"><span style="font-size:22px; font-weight:800; color:#111;">R$</span><span style="font-size:52px; font-weight:900; color:#111; line-height:1;">29</span><span style="font-size:22px; font-weight:800; color:#111;">,90</span></p>
+          <p style="font-size:13px; color:#888; margin-bottom:16px;">Menos de R$ 1,00 por dia pra voltar a ser o homem que ela quer</p>
+          <button class="btn btn-pulse-green" style="width:100%; letter-spacing:0.05em; font-size:15px; padding:16px 24px; margin-bottom:10px; background:linear-gradient(135deg,#1a6fa5,#2d8dd6);" onclick="window.location.href='https://checkout.g4agency.com.br/VCCL1O8SCVWV'">ACESSAR O PROTOCOLO P5 →</button>
+          <p style="font-size:12px; color:#666; font-weight:600;">✓ Garantia 90 dias &nbsp;•&nbsp; ✓ Acesso vitalício</p>
+        </div>
+
+        <p class="note" style="margin-bottom:80px;">*Estatísticas de pesquisa interna · Equipamento: não necessário</p>
+      `;
+    }
+  }
+
+  function updateStickyBtn() {
+    const step = steps[current];
+    const btn = document.getElementById("stickyBtn");
+    const inner = document.getElementById("stickyBtnInner");
+    if (step.type === "loading" || step.type === "result" || step.type === "generating" || step.type === "gencta") {
+      btn.style.display = "none";
+      return;
+    }
+    if (step.type === "midresult") {
+      btn.style.display = "block";
+      inner.textContent = "Ver meu plano personalizado";
+      inner.disabled = false;
+      return;
+    }
+    if (step.type === "choice" || step.type === "scale" || step.type === "intro") {
+      btn.style.display = "none";
+      return;
+    }
+    btn.style.display = "block";
+    if (step.type === "info") {
+      inner.textContent = "Entendido, continuar";
+      inner.disabled = false;
+    }
+  }
+
+  function stickyNext() {
+    nextStep();
+  }
+
+  // Countdown timer (15 min, shared across all .countdown-timer elements)
+  let _cdSecs = 15 * 60;
+  function _updateCountdown() {
+    const m = String(Math.floor(_cdSecs / 60)).padStart(2, '0');
+    const s = String(_cdSecs % 60).padStart(2, '0');
+    document.querySelectorAll('.countdown-timer').forEach(el => el.textContent = m + ':' + s);
+    if (_cdSecs > 0) _cdSecs--;
+  }
+  setInterval(_updateCountdown, 1000);
+  _updateCountdown();
+
+  function selectIntroAge(index) {
+    answers["intro_choice"] = index;
+    saveState();
+    document.querySelectorAll(".intro-screen .option").forEach((el, i) => {
+      el.classList.toggle("selected", i === index);
+    });
+    setTimeout(() => nextStep(), 300);
+  }
+
+  function selectOption(id, index) {
+    answers[id] = index;
+    saveState();
+    document.querySelectorAll(".option").forEach((el, i) => {
+      el.classList.toggle("selected", i === index);
+    });
+    setTimeout(() => nextStep(), 300);
+  }
+
+  function selectScale(id, value) {
+    answers[id] = value;
+    document.querySelectorAll(".scale-btn").forEach((el, i) => {
+      el.classList.toggle("selected", i + 1 === value);
+    });
+    setTimeout(() => nextStep(), 300);
+  }
+
+  function saveState() {
+    sessionStorage.setItem("quizState", JSON.stringify({ current, answers }));
+  }
+
+  function nextStep() {
+    if (current < steps.length - 1) {
+      current++;
+      saveState();
+      renderStep();
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }
+  }
+
+  renderStep();
+</script>
+</body>
+</html>

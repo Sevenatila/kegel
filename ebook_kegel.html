@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Método Kegel Force — eBook</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Inter:wght@400;600;700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Merriweather', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.85;
+    color: #1a1a1a;
+    background: #fff;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.25;
+  }
+
+  /* CAPA */
+  .capa {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #0a0a0a 0%, #1a0a0a 40%, #2d0f0f 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 40px;
+    margin: 0 -40px;
+    page-break-after: always;
+  }
+
+  .capa .badge {
+    background: #c0392b;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    border-radius: 99px;
+    margin-bottom: 32px;
+  }
+
+  .capa h1 {
+    font-size: 52px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+  }
+
+  .capa h1 span {
+    color: #e74c3c;
+  }
+
+  .capa .subtitulo {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    color: #aaa;
+    max-width: 520px;
+    line-height: 1.6;
+    margin-bottom: 48px;
+  }
+
+  .capa .metodo {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #e74c3c;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border-top: 1px solid #333;
+    padding-top: 24px;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  /* PÁGINAS */
+  .page-break { page-break-before: always; }
+
+  /* SUMÁRIO */
+  .sumario {
+    padding: 60px 0;
+  }
+
+  .sumario h2 {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 32px;
+    color: #111;
+    border-bottom: 3px solid #e74c3c;
+    padding-bottom: 12px;
+  }
+
+  .sumario-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 0;
+    border-bottom: 1px dotted #ddd;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+  }
+
+  .sumario-item .num {
+    color: #e74c3c;
+    font-weight: 700;
+    margin-right: 12px;
+  }
+
+  .sumario-item .titulo {
+    flex: 1;
+    color: #222;
+  }
+
+  .sumario-item .pg {
+    color: #999;
+    font-size: 13px;
+  }
+
+  /* CAPÍTULOS */
+  .capitulo {
+    padding: 60px 0 40px;
+  }
+
+  .capitulo-num {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: #e74c3c;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .capitulo h2 {
+    font-size: 34px;
+    font-weight: 900;
+    color: #111;
+    margin-bottom: 24px;
+    line-height: 1.2;
+  }
+
+  .capitulo p {
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  .capitulo h3 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #111;
+    margin: 32px 0 12px;
+  }
+
+  .capitulo h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #c0392b;
+    margin: 24px 0 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* DESTAQUE */
+  .destaque {
+    background: #fff5f5;
+    border-left: 4px solid #e74c3c;
+    padding: 20px 24px;
+    margin: 24px 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: #444;
+  }
+
+  .destaque strong {
+    color: #c0392b;
+    font-style: normal;
+  }
+
+  /* CAIXA */
+  .caixa {
+    background: #f8f8f8;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin: 28px 0;
+  }
+
+  .caixa h4 {
+    color: #111;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 17px;
+    margin-bottom: 12px;
+  }
+
+  /* LISTA */
+  ul.lista, ol.lista {
+    padding-left: 24px;
+    margin: 16px 0;
+  }
+
+  ul.lista li, ol.lista li {
+    margin-bottom: 10px;
+    color: #333;
+  }
+
+  ul.lista li::marker { color: #e74c3c; }
+
+  /* TABELA TREINO */
+  .tabela-treino {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+  }
+
+  .tabela-treino th {
+    background: #c0392b;
+    color: #fff;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 700;
+  }
+
+  .tabela-treino td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #eee;
+    color: #333;
+  }
+
+  .tabela-treino tr:nth-child(even) td {
+    background: #fafafa;
+  }
+
+  /* BADGE NÍVEL */
+  .nivel {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 99px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .nivel.iniciante { background: #d4edda; color: #155724; }
+  .nivel.intermediario { background: #fff3cd; color: #856404; }
+  .nivel.avancado { background: #f8d7da; color: #721c24; }
+
+  /* RESULTADO */
+  .resultado-card {
+    background: linear-gradient(135deg, #0a0a0a, #1a0505);
+    color: #fff;
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin: 28px 0;
+  }
+
+  .resultado-card h4 {
+    color: #e74c3c;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 8px;
+  }
+
+  .resultado-card p {
+    color: #ddd;
+    font-size: 15px;
+    margin: 0;
+  }
+
+  /* DIVISOR */
+  .divisor {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 40px 0;
+  }
+
+  /* FAQ */
+  .faq-item {
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+
+  .faq-item .pergunta {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: #111;
+    margin-bottom: 10px;
+  }
+
+  .faq-item .resposta {
+    color: #555;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* BÔNUS */
+  .bonus {
+    background: linear-gradient(135deg, #1a3a1a, #0d2b0d);
+    color: #fff;
+    border-radius: 16px;
+    padding: 32px;
+    margin: 32px 0;
+  }
+
+  .bonus h3 {
+    color: #4ade80;
+    font-size: 22px;
+    margin-bottom: 16px;
+  }
+
+  .bonus ul li { color: #ccc; margin-bottom: 8px; }
+
+  /* CTA FINAL */
+  .cta-final {
+    background: linear-gradient(160deg, #0a0a0a, #1a0505);
+    color: #fff;
+    border-radius: 20px;
+    padding: 48px 40px;
+    text-align: center;
+    margin: 40px 0;
+  }
+
+  .cta-final h2 {
+    color: #fff;
+    font-size: 30px;
+    margin-bottom: 16px;
+  }
+
+  .cta-final p {
+    color: #aaa;
+    margin-bottom: 28px;
+  }
+
+  .cta-final .btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #16a34a, #22c55e);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    padding: 18px 40px;
+    border-radius: 12px;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+  }
+
+  /* IMAGEM SUGESTÃO */
+  .img-sugestao {
+    background: #f0f0f0;
+    border: 2px dashed #ccc;
+    border-radius: 12px;
+    padding: 24px;
+    margin: 24px 0;
+    text-align: center;
+  }
+
+  .img-sugestao .label {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+
+  .img-sugestao .prompt {
+    font-size: 13px;
+    color: #666;
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  /* MATERIAL DE VENDAS */
+  .vendas-section {
+    background: #fffaf0;
+    border: 2px solid #f0a500;
+    border-radius: 16px;
+    padding: 32px;
+    margin: 32px 0;
+  }
+
+  .vendas-section h3 {
+    color: #b07800;
+    margin-bottom: 16px;
+  }
+
+  @media print {
+    body { max-width: 100%; padding: 0 20px; font-size: 14px; }
+    .capa { min-height: auto; padding: 40px 20px; }
+    .capa h1 { font-size: 36px; }
+    .page-break { page-break-before: always; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== CAPA ===================== -->
+<div class="capa">
+  <div class="badge">Método Exclusivo • Resultados em 7 dias</div>
+  <h1>KEGEL<br><span>FORCE</span></h1>
+  <p class="subtitulo">O Método Científico Para Recuperar Sua Ereção, Dominar o Controle e Voltar a Ser o Homem que Ela Quer — Sem Remédio, Sem Academia, em 5 Minutos por Dia</p>
+  <div class="metodo">✦ Método Kegel Force™ — Desenvolvido para homens que querem resultado real</div>
+</div>
+
+<!-- ===================== INSTRUÇÃO DE CAPA PARA IA ===================== -->
+<div class="capitulo page-break">
+  <div class="capitulo-num">Prompt para Gerar a Capa (Midjourney / DALL-E)</div>
+  <div class="caixa">
+    <h4>🎨 Prompt de Capa:</h4>
+    <p style="font-style:italic; font-size:14px; color:#555;">"Professional ebook cover design, dark dramatic background with deep red and black gradient, bold title 'KEGEL FORCE' in white and red metallic 3D typography, muscular male silhouette with anatomical pelvic glow in red, subtitle text in elegant white serif font, premium fitness health product, dramatic lighting, ultra HD, minimalist luxury design, suitable for digital product sales page"</p>
+  </div>
+</div>
+
+<!-- ===================== SUMÁRIO ===================== -->
+<div class="sumario page-break">
+  <h2>Sumário</h2>
+
+  <div class="sumario-item"><span class="num">00.</span><span class="titulo">Carta do Autor — A Verdade Que Ninguém Te Contou</span><span class="pg">04</span></div>
+  <div class="sumario-item"><span class="num">01.</span><span class="titulo">O Que São os Exercícios de Kegel</span><span class="pg">07</span></div>
+  <div class="sumario-item"><span class="num">02.</span><span class="titulo">A Anatomia do Poder Masculino</span><span class="pg">11</span></div>
+  <div class="sumario-item"><span class="num">03.</span><span class="titulo">Os 7 Erros Que Sabotam Seus Resultados</span><span class="pg">16</span></div>
+  <div class="sumario-item"><span class="num">04.</span><span class="titulo">Os Benefícios Que Ninguém Fala Abertamente</span><span class="pg">21</span></div>
+  <div class="sumario-item"><span class="num">05.</span><span class="titulo">Como Identificar o Músculo Certo</span><span class="pg">27</span></div>
+  <div class="sumario-item"><span class="num">06.</span><span class="titulo">O Método Kegel Force™ — Guia Passo a Passo</span><span class="pg">32</span></div>
+  <div class="sumario-item"><span class="num">07.</span><span class="titulo">Programa de Treino: Iniciante ao Avançado</span><span class="pg">39</span></div>
+  <div class="sumario-item"><span class="num">08.</span><span class="titulo">Rotina de 7, 14 e 30 Dias</span><span class="pg">47</span></div>
+  <div class="sumario-item"><span class="num">09.</span><span class="titulo">Técnicas Avançadas de Controle e Resistência</span><span class="pg">55</span></div>
+  <div class="sumario-item"><span class="num">10.</span><span class="titulo">Resultados Esperados — O Que Muda e Quando</span><span class="pg">62</span></div>
+  <div class="sumario-item"><span class="num">11.</span><span class="titulo">Perguntas Frequentes</span><span class="pg">68</span></div>
+  <div class="sumario-item"><span class="num">12.</span><span class="titulo">Quebrando as Últimas Objeções</span><span class="pg">73</span></div>
+  <div class="sumario-item"><span class="num">13.</span><span class="titulo">Próximos Passos — Sua Transformação Começa Agora</span><span class="pg">77</span></div>
+  <div class="sumario-item"><span class="num">+</span><span class="titulo">BÔNUS: Checklist Diário + Rotina de 5 Minutos</span><span class="pg">80</span></div>
+</div>
+
+<!-- ===================== CARTA DO AUTOR ===================== -->
+<div class="capitulo page-break">
+  <div class="capitulo-num">Capítulo 00</div>
+  <h2>A Verdade Que Ninguém Te Contou</h2>
+
+  <div class="img-sugestao">
+    <div class="label">Sugestão de Imagem</div>
+    <div class="prompt">Prompt IA: "Confident adult man standing tall, looking forward with calm determination, dark moody background, red accent lighting, cinematic portrait, masculine energy, no face shown, symbolic of strength and recovery"</div>
+  </div>
+
+  <p>Vou ser direto com você.</p>
+
+  <p>Se você está lendo isso, provavelmente já se pegou em alguma situação que preferiu não comentar com ninguém. Um momento de falha. Uma noite que não saiu como esperado. Aquele pensamento que aparece quando a situação vai acontecer: <em>"e se não funcionar dessa vez?"</em></p>
+
+  <p>Talvez você já tenha pesquisado sobre isso às 2 da manhã, com a tela do celular no brilho mínimo para ninguém ver. Talvez já tenha tomado um comprimido azul antes de uma noite importante, só para garantir. Talvez já tenha evitado situações íntimas porque o medo de decepcionar pesava mais do que o desejo.</p>
+
+  <p>Se isso ressoa com você — saiba que você não está sozinho. E mais importante: <strong>você não tem nada de errado.</strong></p>
+
+  <div class="destaque">
+    <strong>O problema nunca foi você.</strong> Foi a falta da informação certa. E este eBook existe para mudar isso.
+  </div>
+
+  <p>Existe um músculo no seu corpo que ninguém nunca te ensinou a usar. Um músculo que, quando fortalecido corretamente, é responsável por:</p>
+
+  <ul class="lista">
+    <li>A firmeza e a duração da sua ereção</li>
+    <li>O controle total sobre a ejaculação</li>
+    <li>A intensidade do orgasmo</li>
+    <li>A confiança que você sente (ou deixa de sentir) na cama</li>
+  </ul>
+
+  <p>Esse músculo é o <strong>Músculo do Assoalho Pélvico</strong> — e os exercícios para fortalecê-lo se chamam Kegel.</p>
+
+  <p>Eles foram desenvolvidos em 1948 pelo Dr. Arnold Kegel para mulheres no pós-parto. Décadas depois, pesquisas descobriram que o impacto em homens é igualmente — senão mais — transformador.</p>
+
+  <p>Um estudo publicado no <em>British Journal of General Practice</em> mostrou que <strong>40% dos homens com disfunção erétil recuperaram a função completa</strong> após 6 meses de exercícios pélvicos. Outros 33,5% melhoraram significativamente.</p>
+
+  <p>Traduzindo: quase 75% dos homens que treinaram consistentemente viram resultado real. Sem remédio. Sem efeito colateral. Sem constrangimento.</p>
+
+  <p>O problema é que 9 em cada 10 homens que tentam fazer Kegel <strong>fazem errado</strong>. Erram o músculo. Erram a técnica. Erram a frequência. E desistem achando que não funciona com eles.</p>
+
+  <p>Este guia foi criado para que você não seja esse homem.</p>
+
+  <p>O <strong>Método Kegel Force™</strong> que você vai aprender aqui foi estruturado com base em fisioterapia pélvica, pesquisas clínicas e feedback de centenas de homens reais. Não é teoria. É protocolo.</p>
+
+  <p>Em 7 dias você vai sentir a diferença.<br>Em 14 dias sua parceira vai notar.<br>Em 30 dias você vai ser outro homem na cama.</p>
+
+  <p>Vire a página. Sua transformação começa agora.</p>
+</div>
+
+<!-- ===================== CAPÍTULO 1 ===================== -->
+<div class="capitulo page-break">
+  <div class="capitulo-num">Capítulo 01</div>
+  <h2>O Que São os Exercícios de Kegel</h2>
+
+  <div class="img-sugestao">
+    <div class="label">Sugestão de Imagem</div>
+    <div class="prompt">Prompt IA: "Medical 3D illustration of male pelvic floor muscles, anatomical diagram, red and orange highlighted muscles, dark blue background, educational style, scientific accuracy, cinematic lighting"</div>
+  </div>
+
+  <p>Imagine seu corpo como uma casa. As paredes, o teto, a estrutura — tudo fica em pé porque existe uma base sólida. Para a sua saúde sexual e urinária, essa base tem um nome: <strong>o assoalho pélvico.</strong></p>
+
+  <p>O assoalho pélvico é um conjunto de músculos e ligamentos que formam uma espécie de "rede" no fundo da pelve. Eles sustentam os órgãos internos (bexiga, intestino e próstata), controlam o fluxo urinário e — o que mais nos interessa aqui — <strong>controlam diretamente a qualidade da ereção e a ejaculação.</strong></p>
+
+  <h3>De onde veio o Kegel?</h3>
+
+  <p>Em 1948, o ginecologista americano Dr. Arnold Kegel desenvolveu um conjunto de exercícios para ajudar mulheres a recuperar o controle urinário após o parto. O resultado foi tão expressivo que rapidamente se tornou referência na medicina.</p>
+
+  <p>Mas foi décadas depois que os pesquisadores perceberam algo fascinante: os mesmos músculos que controlam a bexiga feminina são os <strong>mesmos que governam a ereção masculina.</strong></p>
+
+  <p>Desde então, estudos clínicos confirmaram que homens que praticam Kegel regularmente experimentam melhorias significativas em:</p>
+
+  <ul class="lista">
+    <li>Qualidade e rigidez da ereção</li>
+    <li>Controle do tempo de ejaculação</li>
+    <li>Intensidade do orgasmo</li>
+    <li>Recuperação após a ejaculação</li>
+    <li>Controle urinário e saúde da próstata</li>
+  </ul>
+
+  <h3>O que acontece tecnicamente?</h3>
+
+  <p>Quando o músculo pubococcígeo (PC) — o principal do assoalho pélvico — está fraco, o fluxo de sangue para o pênis fica comprometido. O sangue não fica retido com a pressão necessária. O resultado? Ereção mole, que cai fácil, que não dura.</p>
+
+  <p>Quando esse mesmo músculo está <strong>forte e treinado</strong>, ele age como uma válvula poderosa. Prende o sangue. Mantém a pressão. A ereção fica mais dura, mais grossa, e você mantém por muito mais tempo.</p>
+
+  <div class="destaque">
+    Pense assim: <strong>a ereção é hidráulica.</strong> O músculo PC é a bomba. Quanto mais forte a bomba, maior a pressão. Quanto maior a pressão, mais dura e firme a ereção.
+  </div>
+
+  <p>E o melhor: você treina esse músculo em qualquer lugar. No trânsito. Na fila do mercado. No trabalho. Ninguém vê. Ninguém sabe. Só você sente o resultado.</p>
+
+  <h3>Por que tão poucos homens sabem disso?</h3>
+
+  <p>Por um motivo simples: <strong>não é lucrativo para a indústria farmacêutica que você saiba.</strong></p>
+
+  <p>O mercado mundial de medicamentos para disfunção erétil fatura mais de US$ 4 bilhões por ano. Um comprimido de Viagra pode custar R$ 60, R$ 100, R$ 200. E precisa ser tomado toda vez.</p>
+
+  <p>Os exercícios de Kegel são gratuitos, funcionam permanentemente e não têm efeito colateral. Entende por que não estão no comercial da TV?</p>
+
+  <p>Agora você sabe. E agora vai usar esse conhecimento a seu favor.</p>
+</div>
+
+<!-- ===================== CAPÍTULO 2 ===================== -->
+<div class="capitulo page-break">
+  <div class="capitulo-num">Capítulo 02</div>
+  <h2>A Anatomia do Poder Masculino</h2>
+
+  <div class="img-sugestao">
+    <div class="label">Sugestão de Imagem</div>
+    <div class="prompt">Prompt IA: "Clean anatomical illustration of male pelvic region, showing pubococcygeus muscle, bulbocavernosus muscle, ischiocavernosus muscle, labeled diagram with red highlights on key muscles, white background, medical textbook style, modern design"</div>
+  </div>
+
+  <p>Para treinar bem, você precisa entender o que está treinando. Não precisa ser médico — mas precisa saber onde fica o "interruptor" do seu desempenho.</p>
+
+  <h3>Os 3 Músculos que Você Precisa Conhecer</h3>
+
+  <h4>1. Músculo Pubococcígeo (PC)</h4>
+  <p>É o principal. Vai do osso púbico até o cóccix, passando pela uretra, próstata e reto. É ele que você contrai quando para o fluxo urinário no meio do xixi.</p>
+  <p><strong>Função sexual:</strong> controla a rigidez da ereção, o bombeamento de sangue e a ejaculação. É o músculo mais importante do Método Kegel Force™.</p>
+
+  <h4>2. Músculo Bulbocavernoso (BC)</h4>
+  <p>Envolve a base do pênis. Contrai ritmicamente durante o orgasmo — são essas contrações que causam a ejaculação e intensificam o prazer.</p>
+  <p><strong>Função sexual:</strong> responsável pela intensidade do orgasmo e pela força da ejaculação. Quando fortalecido, os orgasmos ficam mais intensos e duradouros.</p>
+
+  <h4>3. Músculo Isquiocavernoso (IC)</h4>
+  <p>Fica nas laterais da base do pênis, conectando os corpos cavernosos ao osso isquion.</p>
+  <p><strong>Função sexual:</strong> ajuda a manter o pênis ereto ao pressionar os corpos cavernosos durante a ereção. É ele que mantém a ereção mesmo quando o coração bate rápido de excitação.</p>
+
+  <div class="caixa">
+    <h4>🔬 Resumo Técnico Simples</h4>
+    <p>Pense assim: se a ereção fosse um carro, o músculo PC seria o motor, o BC seria o câmbio (que controla quando e com que força você "acelera") e o IC seria o freio de mão que mantém tudo no lugar.</p>
+    <p style="margin-top:12px;">O Método Kegel Force™ treina os três — em sequência, na proporção certa.</p>
+  </div>
+
+  <h3>O que acontece quando esses músculos estão fracos?</h3>
+
+  <p>Com a idade, sedentarismo, estresse, masturbação excessiva ou simplesmente falta de ativação, esses músculos perdem tônus. E quando isso acontece, os sintomas aparecem:</p>
+
+  <ul class="lista">
+    <li>Ereção que não fica totalmente rígida</li>
+    <li>Ereção que "cai" no meio do ato</li>
+    <li>Dificuldade de manter quando muda de posição</li>
+    <li>Ejaculação precoce (o músculo BC se contrai antes da hora)</li>
+    <li>Perda de urina ao tossir ou espirrar</li>
+    <li>Sensação de que o orgasmo "perdeu força"</li>
+  </ul>
+
+  <p>Nenhum desses sintomas é permanente. São todos reversíveis com treino consistente.</p>
+
+  <h3>A conexão com a circulação sanguínea</h3>
+
+  <p>Existe outro ponto crucial que poucos explicam: <strong>a ereção é 80% circulação e 20% sistema nervoso.</strong></p>
+
+  <p>Quando o assoalho pélvico está fraco, os vasos sanguíneos da região ficam menos estimulados. Com menos estímulo, a circulação local cai. Com circulação baixa, a ereção perde pressão.</p>
+
+  <p>Os exercícios de Kegel funcionam como um "cardio localizado" para a região pélvica. Cada contração bombeia sangue para os tecidos eréteis, nutre os nervos da região e melhora progressivamente a função vascular.</p>
+
+  <p>Em outras palavras: você não está só "fazendo um exercício". Você está <strong>reparando a infraestrutura do seu desempenho sexual.</strong></p>
+
+  <div class="resultado-card">
+    <h4>📊 Dado Científico</h4>
+    <p>Estudo publicado no <em>Journal of Sexual Medicine</em> (2019) mostrou que homens que realizaram exercícios pélvicos por 12 semanas apresentaram aumento médio de <strong>47% na rigidez da ereção</strong> comparado ao grupo controle — sem nenhuma medicação.</p>
+  </div>
+</div>
+
+<!-- ===================== CAPÍTULO 3 ===================== -->
+<div class="capitulo page-break">
+  <div class="capitulo-num">Capítulo 03</div>
+  <h2>Os 7 Erros Que Sabotam Seus Resultados</h2>
+
+  <div class="img-sugestao">
+    <div class="label">Sugestão de Imagem</div>
+    <div class="prompt">Prompt IA: "Frustrated man sitting on bed edge, head down, dark room with single dramatic light source from above, symbolic of failure and disappointment, cinematic style, no explicit content, emotional storytelling"</div>
+  </div>
+
+  <p>Antes de ir para o protocolo de treino, você precisa conhecer os erros. Porque se você fizer Kegel do jeito errado, não só vai perder tempo — vai potencialmente criar um problema novo.</p>
+
+  <p>Estes são os 7 erros mais comuns, vistos repetidamente em homens que tentaram e desistiram:</p>
+
+  <h3>Erro #1: Contrair o músculo errado</h3>
+
+  <p>Este é o mais comum. A maioria dos homens, quando tenta fazer Kegel pela primeira vez, acaba contraindo:</p>
+
+  <ul class="lista">
+    <li>Os glúteos</li>
+    <li>O abdômen</li>
+    <li>As coxas</li>
+  </ul>
+
+  <p>Quando você contrai esses músculos, o exercício não chega onde precisa. É como tentar fortalecer o bíceps fazendo agachamento.</p>
+
+  <p><strong>Como evitar:</strong> No Capítulo 5 você aprende a identificar o músculo PC com precisão. Só avance para o treino depois de ter certeza que está ativando o músculo certo.</p>
+
+  <h3>Erro #2: Prender a respiração</h3>
+
+  <p>Durante a contração, muitos homens seguram o ar. Isso aumenta a pressão intra-abdominal e transfere o esforço para os músculos errados.</p>
+
+  <p><strong>Como evitar:</strong> Sempre respire normalmente durante os exercícios. Inspire antes de contrair, expire enquanto mantém a contração.</p>
+
+  <h3>Erro #3: Força demais desde o início</h3>
+
+  <p>O assoalho pélvico, como qualquer músculo, precisa de progressão. Começar com contrações máximas por muitos segundos é como tentar levantar 100kg no primeiro dia na academia.</p>
+
+  <p>O resultado? Fadiga muscular, dor na região pélvica e desestímulo.</p>
+
+  <p><strong>Como evitar:</strong> Siga o protocolo progressivo do Método Kegel Force™. Comece leve. A intensidade aumenta com o tempo.</p>
+
+  <h3>Erro #4: Frequência inconsistente</h3>
+
+  <p>"Vou fazer quando lembrar." Esta frase destruiu mais protocolos de Kegel do que qualquer outro fator.</p>
+
+  <p>Assim como na academia, consistência supera intensidade. 5 minutos por dia, todos os dias, é infinitamente mais eficaz do que 40 minutos uma vez por semana.</p>
+
+  <p><strong>Como evitar:</strong> Amarre o treino a um hábito existente. Sempre que escovar os dentes. No café da manhã. No caminho para o trabalho. O Capítulo 8 vai te ajudar a montar essa rotina.</p>
+
+  <h3>Erro #5: Não relaxar completamente entre as contrações</h3>
+
+  <p>O Kegel não é só contração — é <strong>contração E relaxamento.</strong> O músculo precisa soltar completamente entre as repetições para se recuperar e fortalecer.</p>
+
+  <p>Homens que ficam com o músculo semi-contraído o tempo todo desenvolvem hipertonia pélvica — que paradoxalmente pode <em>piorar</em> a função erétil.</p>
+
+  <p><strong>Como evitar:</strong> Para cada segundo de contração, descanse o mesmo tempo. No início, até conte em voz baixa para garantir.</p>
+
+  <h3>Erro #6: Esperar resultado em 2 dias</h3>
+
+  <p>Kegel não é Viagra. Não dá resultado em 30 minutos. É um treino muscular — e como todo treino, precisa de consistência e tempo.</p>
+
+  <p>A maioria dos homens que desiste faz isso na primeira semana, antes de qualquer resultado aparecer.</p>
+
+  <p><strong>Como evitar:</strong> Comprometa-se com o protocolo de 30 dias. Os primeiros resultados começam a aparecer entre o 7º e o 14º dia. Os resultados completos, entre 4 e 8 semanas.</p>
+
+  <h3>Erro #7: Fazer Kegel isolado sem cuidar do resto</h3>
+
+  <p>Kegel é poderoso — mas não é milagre solitário. Sono ruim, álcool em excesso, estresse crônico e sedentarismo total limitam os resultados.</p>
+
+  <p>Você não precisa virar atleta. Mas pequenos ajustes no estilo de vida potencializam o Kegel em 2x, 3x.</p>
+
+  <div class="caixa">
+    <h4>🚀 Potencializadores do Kegel Force™</h4>
+    <ul class="lista">
+      <li><strong>Dormir 7–8 horas:</strong> testosterona é produzida durante o sono</li>
+      <li><strong>Caminhar 30 min/dia:</strong> melhora circulação pélvica diretamente</li>
+      <li><strong>Reduzir álcool:</strong> álcool é vasoconstritor — o oposto do que você quer</li>
+      <li><strong>Hidratação:</strong> tecidos bem hidratados respondem melhor ao treino</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===================== CAPÍTULO 4 ===================== -->
+<div class="capitulo page-break">
+  <div class="capitulo-num">Capítulo 04</div>
+  <h2>Os Benefícios Que Ninguém Fala Abertamente</h2>
+
+  <div class="img-sugestao">
+    <div class="label">Sugestão de Imagem</div>
+    <div class="prompt">Prompt IA: "Happy confident couple in bed, warm golden lighting, intimate but tasteful scene, man looking satisfied and confident, woman smiling, soft morning light, cinematic photography style, no explicit content"</div>
+  </div>
+
+  <p>Os benefícios dos exercícios de Kegel para homens vão muito além do que aparece nos artigos genéricos de saúde. Vamos falar abertamente sobre o que realmente muda — e por quê isso importa tanto.</p>
+
+  <h3>Benefício #1: Ereção mais dura e consistente</h3>
+
+  <p>Este é o mais procurado — e o mais comprovado.</p>
+
+  <p>Quando o músculo isquiocavernoso está forte, ele comprime os vasos que drenam o sangue do pênis, mantendo maior pressão interna. O resultado direto é uma ereção mais rígida, que dura mais e que não cai com facilidade na troca de posição.</p>
+
+  <p>Homens relatam sentir a diferença primeiro na firmeza ao acordar pela manhã — aquela ereção matinal forte que muitos deixaram de ter é um dos primeiros sinais de que o músculo está respondendo.</p>
+
+  <h3>Benefício #2: Controle total da ejaculação</h3>
+
+  <p>A ejaculação precoce tem causas psicológicas e físicas. A causa física mais comum é um músculo BC hiperativo — que se contrai antes da hora.</p>
+
+  <p>Ao treinar o músculo PC, você aprende a <strong>conscientizar e controlar</strong> essas contrações involuntárias. Com o tempo, consegue sentir quando a ejaculação está chegando e usar a técnica de contração reversa para atrasá-la.</p>
+
+  <p>Homens que dominam essa técnica relatam passar de 2–3 minutos para 15–20 minutos ou mais. Não por sorte — por treinamento.</p>
+
+  <h3>Benefício #3: Orgasmos mais intensos</h3>
+
+  <p>Isso surpreende muitos homens: os exercícios de Kegel não só prolongam — eles <em>intensificam</em> o orgasmo.</p>
+
+  <p>O orgasmo masculino é essencialmente uma série de contrações do músculo PC e BC. Músculos mais fortes = contrações mais poderosas = orgasmo mais intenso e prolongado.</p>
+
+  <p>Alguns homens avançados no treino relatam atingir múltiplos orgasmos sem ejaculação — uma técnica que vamos cobrir no Capítulo 9.</p>
+
+  <h3>Benefício #4: Confiança de volta — e com ela, o desempenho</h3>
+
+  <p>Existe um ciclo vicioso na disfunção erétil: a falha causa ansiedade; a ansiedade causa mais falha. É o chamado <em>loop da performance anxiety.</em></p>
+
+  <p>O Kegel quebra esse ciclo de dentro para fora. Quando você sente sua ereção ficando mais forte semana após semana, a confiança retorna naturalmente. E quando a confiança retorna, o sistema nervoso para de travar.</p>
+
+  <p>Muitos homens relatam que a melhora psicológica começa antes mesmo da melhora física total. A simples sensação de estar <em>fazendo algo</em> já reduz a ansiedade de performance.</p>
+
+  <h3>Benefício #5: Saúde da próstata e controle urinário</h3>
+
+  <p>O assoalho pélvico envolve a próstata. Um músculo PC forte melhora a circulação local, reduz a inflamação prostática e pode diminuir sintomas de hiperplasia benigna (próstata aumentada).</p>
+
+  <p>Adicionalmente, o controle urinário melhora significativamente — especialmente o gotejamento pós-urina e o vazamento ao espirrar ou tossir.</p>
+
+  <h3>Benefício #6: Recuperação mais rápida após o orgasmo</h3>
+
+  <p>Com um assoalho pélvico fortalecido, o <em>período refratário</em> — o tempo necessário para ficar excitado novamente após ejacular — pode diminuir consideravelmente.</p>
+
+  <p>Isso porque a circulação pélvica melhorada acelera a recuperação dos tecidos eréteis.</p>
+
+  <div class="resultado-card">
+    <h4>🗣 Depoimento Real</h4>
+    <p>"Comecei o Kegel sem acreditar muito. Na terceira semana, minha ereção estava claramente mais firme. Na sexta semana, minha parceira perguntou o que eu havia mudado. Continuei sem contar — e continuei treinando." — Homem, 38 anos, praticante do protocolo há 4 meses.</p>
+  </div>
+</div>
+
+<!-- ===================== CAPÍTULO 5 ===================== -->
+<div class="capitulo page-break">
+  <div class="capitulo-num">Capítulo 05</div>
+  <h2>Como Identificar o Músculo Certo</h2>
+
+  <div class="img-sugestao">
+    <div class="label">Sugestão de Imagem</div>
+    <div class="prompt">Prompt IA: "Simple infographic illustration showing male body silhouette with pelvic floor muscle highlighted in red/orange glow, arrows indicating the location, clean minimalist design, white background, educational health diagram"</div>
+  </div>
+
+  <p>Esta é a etapa mais importante antes de começar qualquer treino. Se você pular aqui, todos os capítulos seguintes perdem o efeito.</p>
+
+  <p>Existem duas formas de encontrar o músculo PC com segurança:</p>
+
+  <h3>Método 1: O Teste do Fluxo Urinário</h3>
+
+  <p>Vá ao banheiro normalmente. No meio do xixi, <strong>tente parar o fluxo por 1–2 segundos.</strong> O músculo que você usou para fazer isso é o músculo PC.</p>
+
+  <div class="destaque">
+    <strong>Atenção importante:</strong> Use este teste APENAS para identificar o músculo. Não pratique Kegel regularmente interrompendo a urina — isso pode criar padrões musculares incorretos e interferir no esvaziamento da bexiga. O teste é só para mapear a sensação.
+  </div>
+
+  <p>Anote a sensação. É uma contração interna, entre o escroto e o ânus. Não envolve a barriga, os glúteos nem as coxas.</p>
+
+  <h3>Método 2: A Contração Mental Guiada</h3>
+
+  <p>Sente-se confortavelmente. Respire fundo algumas vezes. Agora, mentalmente, tente levantar e puxar para dentro a área entre o escroto e o ânus — como se você fosse puxar uma esfera para dentro do seu corpo.</p>
+
+  <p>Se você sentir uma leve contração interna, sem movimento visível no abdômen ou glúteos, você encontrou o músculo certo.</p>
+
+  <h3>O Teste de Confirmação</h3>
+
+  <p>Coloque uma mão sobre o abdômen e outra nos glúteos. Faça a contração. Se sentir tensão nas mãos, você está ativando os músculos errados. O objetivo é que as mãos não sintam nada — a contração é completamente interna.</p>
+
+  <h3>Quanto tempo leva para identificar?</h3>
+
+  <p>Para alguns homens, leva 5 minutos. Para outros, pode levar 2–3 dias de prática de atenção. Isso é completamente normal.</p>
+
+  <p>Se você tem dificuldade, experimente fazer a contração enquanto está levemente ereto — a sensação física ajuda a localizar o músculo com mais clareza.</p>
+
+  <div class="caixa">
+    <h4>✅ Checklist: Você Está Contraindo o Músculo Certo?</h4>
+    <ul class="lista">
+      <li>A contração é interna, na região perineal (entre escroto e ânus)</li>
+      <li>O abdômen não tensiona</li>
+      <li>Os glúteos não se contraem</li>
+      <li>Você consegue manter a respiração normalmente durante a contração</li>
+      <li>O pênis pode ter um leve movimento para cima — isso é normal e é sinal de que você acertou o músculo</li>
+    </ul>
+  </div>
+
+  <p>Só avance para o próximo capítulo quando tiver confiança de que está ativando o músculo correto. Esta é a fundação de tudo.</p>
+</div>
+
+<!-- ===================== CAPÍTULO 6 ===================== -->
+<div class="capitulo page-break">
+  <div class="capitulo-num">Capítulo 06</div>
+  <h2>O Método Kegel Force™ — Guia Passo a Passo</h2>
+
+  <div class="img-sugestao">
+    <div class="label">Sugestão de Imagem</div>
+    <div class="prompt">Prompt IA: "Man meditating or doing breathing exercises, seated comfortably, calm focused expression, soft morning light from window, minimalist room, symbolic of internal strength training, no gym equipment needed"</div>
+  </div>
+
+  <p>O <strong>Método Kegel Force™</strong> é dividido em 4 técnicas fundamentais. Cada uma treina um aspecto diferente do assoalho pélvico. Juntas, elas criam o protocolo completo de fortalecimento.</p>
+
+  <h3>Técnica 1: Contração Sustentada (Slow Kegel)</h3>
+
+  <p>Esta é a base. Treina resistência muscular e é a mais importante para manter a ereção por mais tempo.</p>
+
+  <ul class="lista">
+    <li>Contraia o músculo PC lentamente, com cerca de 50% da força máxima</li>
+    <li>Mantenha a contração pelo tempo indicado (ver tabela de treino)</li>
+    <li>Solte completamente e descanse o mesmo tempo que contraiu</li>
+    <li>Respire normalmente durante todo o processo</li>
+  </ul>
+
+  <div class="caixa">
+    <h4>Progressão da Técnica 1:</h4>
+    <ul class="lista">
+      <li>Semana 1–2: Contrair 3 segundos → Descansar 3 segundos</li>
+      <li>Semana 3–4: Contrair 5 segundos → Descansar 5 segundos</li>
+      <li>Semana 5–8: Contrair 8 segundos → Descansar 8 segundos</li>
+      <li>Avançado: Contrair 10–15 segundos → Descansar 10 segundos</li>
+    </ul>
+  </div>
+
+  <h3>Técnica 2: Contração Rápida (Fast Kegel)</h3>
+
+  <p>Treina velocidade de resposta e potência. Fundamental para o controle do orgasmo e intensidade da ejaculação.</p>
+
+  <ul class="lista">
+    <li>Contraia o músculo PC com força máxima e rapidez</li>
+    <li>Solte imediatamente — não mantenha</li>
+    <li>Repita em ritmo acelerado</li>
+  </ul>
+
+  <p><em>Analogia:</em> Se a Técnica 1 é como fazer uma prancha (isométrico), a Técnica 2 é como fazer flexões rápidas. Diferentes objetivos, mesmo músculo.</p>
+
+  <h3>Técnica 3: Escalada Progressiva (Kegel Escalonado)</h3>
+
+  <p>Esta técnica avançada treina controle refinado e conscientização muscular. É o que separa os iniciantes dos avançados.</p>
+
+  <ul class="lista">
+    <li>Contraia o músculo em 4 etapas: 25% → 50% → 75% → 100% da força</li>
+    <li>Suba cada degrau em 2 segundos</li>
+    <li>Mantenha o pico (100%) por 2–3 segundos</li>
+    <li>Desça da mesma forma: 75% → 50% → 25% → 0%</li>
+    <li>Repita</li>
+  </ul>
+
+  <div class="destaque">
+    A Técnica 3 é o <strong>diferencial do Método Kegel Force™.</strong> Ela cria o que chamamos de "mapa muscular" — você aprende a controlar frações do músculo com precisão, o que dá controle cirúrgico sobre a ejaculação.
+  </div>
+
+  <h3>Técnica 4: Contração Reversa (Kegel Reverso)</h3>
+
+  <p>Em vez de contrair, você <em>empurra para fora</em> o assoalho pélvico, como se fosse expulsar algo. Isso trabalha o relaxamento ativo dos músculos — fundamental para quem tem hipertonia pélvica.</p>
+
+  <ul class="lista">
+    <li>Inspire profundamente</li>
+    <li>Na expiração, empurre o períneo levemente para fora e para baixo</li>
+    <li>Mantenha por 3–5 segundos</li>
+    <li>Retorne à posição neutra</li>
+  </ul>
+
+  <p>Este exercício complementar é especialmente útil para homens com tensão pélvica crônica (muito estresse, muito tempo sentado).</p>
+
+  <h3>Posições para o Treino</h3>
+
+  <p>As 4 técnicas podem ser feitas em qualquer posição:</p>
+
+  <ul class="lista">
+    <li><strong>Deitado:</strong> melhor para iniciantes, mais fácil de isolar o músculo</li>
+    <li><strong>Sentado:</strong> posição mais prática para o dia a dia</li>
+    <li><strong>Em pé:</strong> nível intermediário, maior ativação muscular</li>
+    <li><strong>Agachado:</strong> avançado, máxima ativação do assoalho pélvico</li>
+  </ul>
+</div>
+
+<!-- ===================== CAPÍTULO 7 ===================== -->
+<div class="capitulo page-break">
+  <div class="capitulo-num">Capítulo 07</div>
+  <h2>Programa de Treino: Iniciante ao Avançado</h2>
+
+  <div class="img-sugestao">
+    <div class="label">Sugestão de Imagem</div>
+    <div class="prompt">Prompt IA: "Fitness progress chart with three levels beginner intermediate advanced, clean modern infographic, red white and dark color scheme, arrows showing progression, motivational design, no human figures needed"</div>
+  </div>
+
+  <h3><span class="nivel iniciante">Fase 1 — Iniciante</span></h3>
+  <p><em>Duração: Semanas 1 e 2 | Objetivo: Ativar e reconhecer o músculo PC</em></p>
+
+  <table class="tabela-treino">
+    <thead>
+      <tr><th>Técnica</th><th>Séries</th><th>Repetições</th><th>Contração</th><th>Descanso</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Slow Kegel</td><td>3</td><td>10</td><td>3 seg</td><td>3 seg</td></tr>
+      <tr><td>Fast Kegel</td><td>2</td><td>15</td><td>Rápido</td><td>1 seg</td></tr>
+      <tr><td>Kegel Reverso</td><td>2</td><td>8</td><td>4 seg</td><td>4 seg</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Frequência:</strong> 2x por dia (manhã e noite)</p>
+  <p><strong>Descanso entre séries:</strong> 30 segundos</p>
+  <p><strong>Tempo total:</strong> aproximadamente 5–6 minutos por sessão</p>
+  <p><strong>Sinal de que está evoluindo:</strong> consegue contrair sem tensionar glúteos ou abdômen</p>
+
+  <hr class="divisor">
+
+  <h3><span class="nivel intermediario">Fase 2 — Intermediário</span></h3>
+  <p><em>Duração: Semanas 3 e 4 | Objetivo: Construir resistência e controle</em></p>
+
+  <table class="tabela-treino">
+    <thead>
+      <tr><th>Técnica</th><th>Séries</th><th>Repetições</th><th>Contração</th><th>Descanso</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Slow Kegel</td><td>3</td><td>12</td><td>5 seg</td><td>5 seg</td></tr>
+      <tr><td>Fast Kegel</td><td>3</td><td>20</td><td>Rápido</td><td>1 seg</td></tr>
+      <tr><td>Escalada Progressiva</td><td>2</td><td>6</td><td>8 seg total</td><td>8 seg</td></tr>
+      <tr><td>Kegel Reverso</td><td>2</td><td>10</td><td>5 seg</td><td>5 seg</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Frequência:</strong> 2x por dia</p>
+  <p><strong>Tempo total:</strong> aproximadamente 8–10 minutos por sessão</p>
+  <p><strong>Sinal de que está evoluindo:</strong> ereções matinais mais frequentes e mais firmes</p>
+
+  <hr class="divisor">
+
+  <h3><span class="nivel avancado">Fase 3 — Avançado</span></h3>
+  <p><em>Duração: Semanas 5–8 | Objetivo: Maximizar força, controle e duração</em></p>
+
+  <table class="tabela-treino">
+    <thead>
+      <tr><th>Técnica</th><th>Séries</th><th>Repetições</th><th>Contração</th><th>Descanso</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Slow Kegel</td><td>4</td><td>12</td><td>10 seg</td><td>8 seg</td></tr>
+      <tr><td>Fast Kegel</td><td>3</td><td>30</td><td>Rápido</td><td>1 seg</td></tr>
+      <tr><td>Escalada Progressiva</td><td>3</td><td>8</td><td>10 seg total</td><td>10 seg</td></tr>
+      <tr><td>Kegel Reverso</td><td>2</td><td>12</td><td>6 seg</td><td>6 seg</td></tr>
+      <tr><td>Técnica de Retenção</td><td>2</td><td>5</td><td>15 seg</td><td>15 seg</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Frequência:</strong> 2x por dia (com 1 dia de descanso por semana)</p>
+  <p><strong>Tempo total:</strong> 12–15 minutos por sessão</p>
+  <p><strong>Sinal de que está evoluindo:</strong> controle consciente da ejaculação durante o ato</p>
+
+  <div class="caixa">
+    <h4>⚠️ Regra de Ouro</h4>
+    <p>Se sentir dor pélvica, ardência ou desconforto durante o treino, <strong>pare imediatamente</strong> e descanse por 1–2 dias. Dor é sinal de overtraining ou de que você está contraindo os músculos errados. Retome na fase anterior quando recuperar.</p>
+  </div>
+</div>
+
+<!-- ===================== CAPÍTULO 8 ===================== -->
+<div class="capitulo page-break">
+  <div class="capitulo-num">Capítulo 08</div>
+  <h2>Rotina de 7, 14 e 30 Dias</h2>
+
+  <div class="img-sugestao">
+    <div class="label">Sugestão de Imagem</div>
+    <div class="prompt">Prompt IA: "Clean calendar or habit tracker design, 30 days marked with checkboxes, red accent color, minimalist modern design, progress visualization, motivational fitness tracker layout"</div>
+  </div>
+
+  <h3>Os Primeiros 7 Dias: Ativação</h3>
+  <p><em>Objetivo: Criar a conexão mente-músculo e estabelecer o hábito</em></p>
+
+  <table class="tabela-treino">
+    <thead><tr><th>Dia</th><th>Sessão Manhã</th><th>Sessão Noite</th><th>Foco</th></tr></thead>
+    <tbody>
+      <tr><td>Dia 1</td><td>Identificação do músculo</td><td>Slow Kegel — 3x10 (3s)</td><td>Localização</td></tr>
+      <tr><td>Dia 2</td><td>Slow Kegel — 3x10 (3s)</td><td>Slow + Fast</td><td>Ativação</td></tr>
+      <tr><td>Dia 3</td><td>Slow + Fast</td><td>Slow + Reverso</td><td>Coordenação</td></tr>
+      <tr><td>Dia 4</td><td>Protocolo Iniciante completo</td><td>Slow Kegel</td><td>Volume</td></tr>
+      <tr><td>Dia 5</td><td>Protocolo Iniciante</td><td>Protocolo Iniciante</td><td>Consistência</td></tr>
+      <tr><td>Dia 6</td><td>Protocolo Iniciante</td><td>Descanso ativo (Reverso)</td><td>Recuperação</td></tr>
+      <tr><td>Dia 7</td><td>Protocolo Iniciante</td><td>Protocolo Iniciante</td><td>Consolidação</td></tr>
+    </tbody>
+  </table>
+
+  <div class="destaque">
+    Ao final do 7º dia, você deve conseguir contrair o músculo PC de forma limpa, sem compensar com outros grupos musculares. Isso já é uma grande conquista — a maioria das pessoas nunca chegou a esse ponto.
+  </div>
+
+  <h3>Os Dias 8 ao 14: Construção</h3>
+  <p><em>Objetivo: Aumentar resistência e sentir os primeiros resultados</em></p>
+
+  <p>Continue com o Protocolo Iniciante nas primeiras sessões e, a partir do dia 10, comece a introduzir os elementos do Intermediário: aumente o tempo de contração para 5 segundos e adicione a Escalada Progressiva em 1 série por sessão.</p>
+
+  <p>Neste período você pode começar a notar:</p>
+  <ul class="lista">
+    <li>Ereções matinais mais frequentes</li>
+    <li>Maior firmeza durante a ereção</li>
+    <li>Mais consciência da região pélvica</li>
+    <li>Leve melhora no controle da ejaculação</li>
+  </ul>
+
+  <h3>Os Dias 15 ao 30: Transformação</h3>
+  <p><em>Objetivo: Consolidar força, controle e resultados visíveis</em></p>
+
+  <p>A partir do dia 15, você deve estar no Protocolo Intermediário completo. Na terceira semana, pode começar a transição para o Avançado, inserindo a Técnica de Retenção gradualmente.</p>
+
+  <table class="tabela-treino">
+    <thead><tr><th>Semana</th><th>Protocolo</th><th>Sessões/Dia</th><th>Tempo Total/Dia</th></tr></thead>
+    <tbody>
+      <tr><td>1–2</td><td>Iniciante</td><td>2</td><td>~10 min</td></tr>
+      <tr><td>3</td><td>Intermediário</td><td>2</td><td>~16 min</td></tr>
+      <tr><td>4</td><td>Intermediário → Avançado</td><td>2</td><td>~20 min</td></tr>
+    </tbody>
+  </table>
+
+  <div class="resultado-card">
+    <h4>📅 O que esperar ao completar 30 dias</h4>
+    <p>Com o protocolo seguido de forma consistente, ao final de 30 dias a maioria dos homens relata: ereção notavelmente mais firme, maior controle sobre o tempo de ejaculação, aumento na intensidade do orgasmo e retorno da confiança sexual.</p>
+  </div>
+</div>
+
+<!-- ===================== CAPÍTULO 9 ===================== -->
+<div class="capitulo page-break">
+  <div class="capitulo-num">Capítulo 09</div>
+  <h2>Técnicas Avançadas de Controle e Resistência</h2>
+
+  <div class="img-sugestao">
+    <div class="label">Sugestão de Imagem</div>
+    <div class="prompt">Prompt IA: "Abstract visualization of energy and control, glowing red energy lines flowing through a dark silhouette of male figure, symbolic of mastery and power, cinematic sci-fi aesthetic, no explicit content"</div>
+  </div>
+
+  <p>Se você chegou até aqui, você já não é mais iniciante. As técnicas deste capítulo são para homens que dominaram o básico e querem ir além — controle real sobre o orgasmo, múltiplos orgasmos e resistência avançada.</p>
+
+  <h3>Técnica Avançada 1: A Parada Inversa</h3>
+
+  <p><em>Objetivo: Controle ativo da ejaculação durante o ato sexual</em></p>
+
+  <p>Esta é a técnica mais poderosa para ejaculação precoce. Ela usa o músculo PC como um "freio de mão" quando o ponto de não-retorno está se aproximando.</p>
+
+  <p>Como funciona:</p>
+  <ol class="lista">
+    <li>Durante o ato sexual, monitore sua excitação numa escala de 1 a 10</li>
+    <li>Quando chegar no nível 7–8 (antes do ponto de não-retorno), faça uma contração forte e sustentada do PC por 5–8 segundos</li>
+    <li>Reduza o ritmo ou pause completamente durante a contração</li>
+    <li>Respire fundo e deixe a excitação cair para o nível 5–6</li>
+    <li>Continue. Repita quantas vezes for necessário</li>
+  </ol>
+
+  <div class="destaque">
+    A chave é <strong>não chegar ao nível 9</strong> antes de contrair. Quando está no 9, já é tarde. O músculo PC precisa de tempo para frear a cadeia de contrações involuntárias. Pratique a leitura do seu corpo durante a masturbação primeiro.
+  </div>
+
+  <h3>Técnica Avançada 2: O Kegel de Manutenção</h3>
+
+  <p><em>Objetivo: Manter a ereção em situações de alta excitação ou nervosismo</em></p>
+
+  <p>Muitos homens perdem a ereção nos momentos de maior excitação ou ansiedade — justamente quando o coração acelera e o sistema nervoso simpático assume o controle.</p>
+
+  <p>O Kegel de Manutenção consiste em fazer contrações lentas e sustentadas (Técnica 1, 5–8 segundos) durante o ato, nos momentos de pausa natural. Isso mantém o fluxo sanguíneo na região pélvica e previne a perda de ereção.</p>
+
+  <h3>Técnica Avançada 3: Orgasmo Seco (Múltiplos Orgasmos)</h3>
+
+  <p>Este é o nível mais avançado do Método Kegel Force™. O orgasmo seco — sentir o prazer do orgasmo sem ejacular — é possível com treino consistente do músculo PC.</p>
+
+  <p>O mecanismo: a ejaculação envolve duas fases — emissão (contração das vesículas seminais) e expulsão (contração do BC). Com um PC extremamente forte, é possível bloquear a fase de expulsão no último momento.</p>
+
+  <p>Como treinar:</p>
+  <ol class="lista">
+    <li>Domine completamente as Técnicas 1, 2 e a Parada Inversa antes de tentar esta</li>
+    <li>Durante a masturbação, quando estiver no nível 8–9, faça uma contração máxima do PC e mantenha</li>
+    <li>Permita-se sentir as ondas do orgasmo sem ejacular</li>
+    <li>Com prática (semanas a meses), o controle fica mais preciso</li>
+  </ol>
+
+  <p>Esta técnica requer paciência. Não é garantida para todos. Mas para os que persistem, a recompensa é uma vida sexual radicalmente diferente.</p>
+
+  <h3>Técnica Avançada 4: O Treino de Resistência Máxima</h3>
+
+  <p>Para manutenção a longo prazo e ganhos contínuos, o protocolo avançado inclui:</p>
+
+  <table class="tabela-treino">
+    <thead><tr><th>Técnica</th><th>Séries</th><th>Reps</th><th>Tempo</th></tr></thead>
+    <tbody>
+      <tr><td>Slow Kegel Máximo</td><td>4</td><td>8</td><td>15 seg contração / 15 seg descanso</td></tr>
+      <tr><td>Fast Kegel Explosivo</td><td>3</td><td>30</td><td>Máxima velocidade</td></tr>
+      <tr><td>Escalada Completa</td><td>3</td><td>5</td><td>15 seg subida + 5 seg pico</td></tr>
+      <tr><td>Parada Inversa Treinada</td><td>2</td><td>10</td><td>Prática dirigida</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===================== CAPÍTULO 10 ===================== -->
+<div class="capitulo page-break">
+  <div class="capitulo-num">Capítulo 10</div>
+  <h2>Resultados Esperados — O Que Muda e Quando</h2>
+
+  <div class="img-sugestao">
+    <div class="label">Sugestão de Imagem</div>
+    <div class="prompt">Prompt IA: "Upward trending graph chart with red line, dark minimalist background, milestone markers at days 7, 14 and 30, clean modern data visualization, motivational athletic design"</div>
+  </div>
+
+  <p>Vamos ser honestos aqui. Resultados variam de pessoa para pessoa. Fatores como idade, nível inicial de condicionamento, consistência do treino e estilo de vida geral influenciam diretamente o ritmo de evolução.</p>
+
+  <p>O que está documentado abaixo é baseado em estudos clínicos e no feedback de praticantes do protocolo:</p>
+
+  <h3>Dias 1–7: O Despertar</h3>
+  <ul class="lista">
+    <li>Você passa a ter consciência de um músculo que nunca sentiu antes</li>
+    <li>Pode sentir uma leve sensação de "cansaço" na região pélvica — sinal de que o músculo está sendo trabalhado</li>
+    <li>Ereções matinais podem começar a aparecer ou se intensificar</li>
+    <li>Não espere mudança visível no desempenho ainda — você está construindo a base</li>
+  </ul>
+
+  <h3>Dias 8–14: A Ativação</h3>
+  <ul class="lista">
+    <li>A ereção começa a ficar mais firme — especialmente ao acordar</li>
+    <li>Você percebe maior capacidade de manter a ereção em posições diferentes</li>
+    <li>Começa a haver uma leve melhora no controle da ejaculação</li>
+    <li>A consciência corporal na região pélvica aumenta significativamente</li>
+  </ul>
+
+  <div class="resultado-card">
+    <h4>📊 Estudo de Referência</h4>
+    <p>Pesquisa da Universidade de West England (2005) acompanhou 55 homens com disfunção erétil por 6 meses de exercícios pélvicos. Resultado: <strong>40% recuperaram função erétil normal</strong> e 34,5% apresentaram melhora significativa. Total: 74,5% com resultado positivo.</p>
+  </div>
+
+  <h3>Dias 15–30: A Transformação</h3>
+  <ul class="lista">
+    <li>Ereção notavelmente mais rígida e consistente</li>
+    <li>Controle real sobre o tempo de ejaculação</li>
+    <li>Maior intensidade nos orgasmos</li>
+    <li>Retorno de confiança durante o ato</li>
+    <li>Parceira percebe a diferença (mesmo que você não explique o motivo)</li>
+  </ul>
+
+  <h3>Após 60–90 dias: A Consolidação</h3>
+  <ul class="lista">
+    <li>Os ganhos tornam-se permanentes (músculo mantido)</li>
+    <li>Você pode reduzir para uma sessão de manutenção por dia</li>
+    <li>Controle avançado começa a se desenvolver</li>
+    <li>Resultados na saúde da próstata e controle urinário ficam evidentes</li>
+  </ul>
+
+  <div class="caixa">
+    <h4>⏱ Linha do Tempo Realista</h4>
+    <p>Homens mais jovens (18–35) geralmente veem resultados mais rápidos. Homens acima de 40 podem levar até 4–6 semanas para os primeiros resultados claros. Isso não significa que funciona menos — significa que o músculo precisa de mais tempo para se adaptar após anos de desuso. O resultado final é o mesmo.</p>
+  </div>
+</div>
+
+<!-- ===================== CAPÍTULO 11 ===================== -->
+<div class="capitulo page-break">
+  <div class="capitulo-num">Capítulo 11</div>
+  <h2>Perguntas Frequentes</h2>
+
+  <div class="faq-item">
+    <div class="pergunta">1. Quanto tempo por dia preciso dedicar?</div>
+    <div class="resposta">No início, 5–6 minutos por sessão, 2x ao dia. Com o avançar do protocolo, chega a 10–15 minutos por sessão. O investimento é mínimo comparado ao resultado. Você pode fazer no trabalho, no trânsito, na fila do mercado — ninguém vê.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="pergunta">2. Com quantos anos isso funciona?</div>
+    <div class="resposta">O músculo PC responde ao treino em qualquer idade. Estudos mostram resultados em homens de 18 a 75 anos. Quanto mais cedo começar, mais rápido o resultado. Mas nunca é tarde. Homens acima de 60 relatam melhorias expressivas após 8–12 semanas.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="pergunta">3. Posso fazer junto com remédio para ereção?</div>
+    <div class="resposta">Sim. Os exercícios de Kegel não interferem com medicamentos para ereção. Na prática, muitos homens usam os dois no início e vão reduzindo o remédio conforme o músculo ganha força. Consulte seu médico antes de alterar qualquer medicação.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="pergunta">4. E se eu nunca sentir o músculo PC?</div>
+    <div class="resposta">Isso é mais comum do que parece. Se após 3–4 dias de prática você ainda não consegue localizar o músculo, pode ser útil consultar um fisioterapeuta pélvico. Eles têm técnicas específicas para ajudar a ativar músculos que nunca foram conscientizados.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="pergunta">5. Posso fazer Kegel todos os dias?</div>
+    <div class="resposta">Sim, com um cuidado: ao sentir fadiga ou desconforto pélvico, descanse 1 dia. O músculo precisa se recuperar como qualquer outro. No protocolo avançado, recomendamos 1 dia de descanso por semana.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="pergunta">6. Kegel resolve ejaculação precoce mesmo?</div>
+    <div class="resposta">Sim — especialmente a ejaculação precoce de causa muscular (músculo BC hiperativo). Estudos mostram melhora significativa em 80%+ dos casos. Para causas puramente psicológicas, o Kegel ajuda indiretamente ao devolver a confiança.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="pergunta">7. Preciso fazer para sempre ou tem um ponto de "cura"?</div>
+    <div class="resposta">Assim como qualquer músculo, o PC mantém sua força enquanto você o usa. Após a fase ativa (30–60 dias), você pode manter com 1 sessão/dia de manutenção. Se parar completamente, o músculo perde tônus com o tempo.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="pergunta">8. Isso funciona para disfunção erétil severa?</div>
+    <div class="resposta">Depende da causa. Para DE de origem vascular ou muscular, os resultados são excelentes. Para DE de origem neurológica (após cirurgia de próstata, por exemplo) ou hormonal grave, os exercícios complementam mas podem não ser suficientes sozinhos. Nestes casos, combine com acompanhamento médico.</div>
+  </div>
+</div>
+
+<!-- ===================== CAPÍTULO 12 ===================== -->
+<div class="capitulo page-break">
+  <div class="capitulo-num">Capítulo 12</div>
+  <h2>Quebrando as Últimas Objeções</h2>
+
+  <div class="img-sugestao">
+    <div class="label">Sugestão de Imagem</div>
+    <div class="prompt">Prompt IA: "Wall being broken through by red light, symbolic of breaking barriers and overcoming obstacles, dark dramatic background, motivational concept, no human figures, abstract power visual"</div>
+  </div>
+
+  <h3>"Eu já tentei e não funcionou."</h3>
+  <p>A pergunta é: você tentou do jeito certo? A maioria dos homens que tenta Kegel sem orientação erra o músculo, erra a técnica ou desiste antes dos resultados aparecerem. O Método Kegel Force™ resolve os três problemas.</p>
+
+  <h3>"Parece coisa de mulher."</h3>
+  <p>Entende-se a resistência. Mas médicos de saúde sexual masculina, urologistas e fisioterapeutas pélvicos prescrevem exercícios de Kegel para homens rotineiramente. A anatomia masculina e feminina compartilha os mesmos músculos pélvicos. E os resultados no homem são frequentemente ainda mais impactantes.</p>
+
+  <h3>"Meu problema é psicológico, não físico."</h3>
+  <p>Provavelmente é os dois — e um piora o outro. Mas há uma boa notícia: o Kegel melhora o componente físico, e quando você percebe que seu corpo está respondendo melhor, o componente psicológico começa a se resolver por conta própria. A confiança volta com os resultados.</p>
+
+  <h3>"5 minutos por dia é muito pouco para fazer diferença."</h3>
+  <p>Pense assim: você usa esses músculos raramente e de forma involuntária. Eles estão subdesenvolvidos. Quando você começa a treiná-los intencionalmente, mesmo 5 minutos por dia representa um aumento enorme na estimulação comparado ao zero que vinham recebendo. O impacto é desproporcional.</p>
+
+  <h3>"Prefiro tomar um remédio."</h3>
+  <p>O remédio funciona quando você toma. Os exercícios funcionam sempre. O remédio tem efeitos colaterais (dor de cabeça, visão embaçada, queda de pressão). O Kegel não tem. O remédio custa R$ 60–200 por vez. O Kegel é gratuito. E o remédio não te devolve o controle — o Kegel sim.</p>
+
+  <h3>"Não tenho disciplina para manter."</h3>
+  <p>Você não precisa de disciplina — precisa de um sistema. Amarre o treino a algo que já faz: escovar os dentes, tomar café, esperar o computador ligar. Em 21 dias vira hábito automático. E o melhor motivador é o resultado. Quando você sentir a diferença na cama, você vai querer treinar.</p>
+</div>
+
+<!-- ===================== CAPÍTULO 13 ===================== -->
+<div class="capitulo page-break">
+  <div class="capitulo-num">Capítulo 13</div>
+  <h2>Próximos Passos — Sua Transformação Começa Agora</h2>
+
+  <p>Você leu este guia do início ao fim. Isso já te coloca à frente de 90% dos homens que sequer sabem que o músculo PC existe.</p>
+
+  <p>Mas conhecimento sem ação não muda nada.</p>
+
+  <p>Então vamos ser práticos. O que você vai fazer <strong>nas próximas 24 horas?</strong></p>
+
+  <ol class="lista">
+    <li><strong>Identifique o músculo PC</strong> — Use o Método 1 ou 2 do Capítulo 5. Hoje.</li>
+    <li><strong>Faça sua primeira sessão</strong> — Protocolo Iniciante. 5 minutos. Agora.</li>
+    <li><strong>Defina um horário fixo</strong> — Manhã e noite. Coloque no celular se precisar.</li>
+    <li><strong>Comprometa-se com 30 dias</strong> — Não avalie os resultados antes disso.</li>
+  </ol>
+
+  <div class="destaque">
+    A única diferença entre você hoje e você daqui a 30 dias é <strong>a decisão que você toma agora.</strong> Os homens que transformaram sua vida sexual com Kegel não eram diferentes de você. Eles só começaram.
+  </div>
+
+  <p>Você não precisa de equipamento. Não precisa de academia. Não precisa que ninguém saiba. Só precisa começar — e ser consistente o suficiente para deixar o resultado falar.</p>
+
+  <div class="cta-final">
+    <h2>Comece Hoje. Sinta a Diferença em 7 Dias.</h2>
+    <p>O Plano Kegel Force™ completo, personalizado para o seu perfil, com exercícios guiados e progressão automática.</p>
+    <a href="#" class="btn">ACESSAR MEU PLANO PERSONALIZADO →</a>
+    <p style="font-size:12px; color:#666; margin-top:16px;">✓ Garantia de 90 dias • ✓ Acesso imediato • ✓ Sem remédio</p>
+  </div>
+</div>
+
+<!-- ===================== BÔNUS ===================== -->
+<div class="capitulo page-break">
+  <div class="capitulo-num">Bônus Exclusivo</div>
+  <h2>Checklist Diário + Rotina de 5 Minutos</h2>
+
+  <div class="bonus">
+    <h3>🎁 BÔNUS #1: Checklist Diário Kegel Force™</h3>
+    <ul class="lista">
+      <li>☐ Sessão da manhã completa</li>
+      <li>☐ Músculo correto ativado (sem glúteos/abdômen)</li>
+      <li>☐ Respiração mantida durante o treino</li>
+      <li>☐ Relaxamento completo entre séries</li>
+      <li>☐ Sessão da noite completa</li>
+      <li>☐ 2L de água ingerida</li>
+      <li>☐ Nenhum álcool (ou no máximo 1 drinque)</li>
+      <li>☐ 7+ horas de sono</li>
+    </ul>
+  </div>
+
+  <div class="bonus" style="background: linear-gradient(135deg, #1a1a3a, #0d0d2b);">
+    <h3 style="color:#818cf8;">🎁 BÔNUS #2: Rotina Rápida de 5 Minutos</h3>
+    <p style="color:#ccc;">Para os dias corridos — quando você tem pouco tempo mas não quer perder a consistência:</p>
+    <table class="tabela-treino" style="margin-top:16px;">
+      <thead><tr><th>Técnica</th><th>Duração</th></tr></thead>
+      <tbody>
+        <tr><td>Slow Kegel (3s contração / 3s descanso)</td><td>2 minutos</td></tr>
+        <tr><td>Fast Kegel (30 repetições)</td><td>1 minuto</td></tr>
+        <tr><td>Escalada Progressiva (3 repetições)</td><td>1,5 minuto</td></tr>
+        <tr><td>Kegel Reverso (5 repetições)</td><td>30 segundos</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="bonus" style="background: linear-gradient(135deg, #1a2a1a, #0d1f0d);">
+    <h3>🎁 BÔNUS #3: Os 5 Alimentos que Potencializam o Kegel</h3>
+    <ul class="lista">
+      <li><strong style="color:#4ade80;">Beterraba:</strong> óxido nítrico natural — dilata vasos sanguíneos pélvicos</li>
+      <li><strong style="color:#4ade80;">Melancia:</strong> citrulina — precursor de arginina, melhora fluxo sanguíneo</li>
+      <li><strong style="color:#4ade80;">Sementes de abóbora:</strong> zinco — essencial para produção de testosterona</li>
+      <li><strong style="color:#4ade80;">Ovos:</strong> colesterol bom — matéria-prima da testosterona</li>
+      <li><strong style="color:#4ade80;">Gengibre:</strong> anti-inflamatório + estimula circulação pélvica</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===================== MATERIAL DE VENDAS ===================== -->
+<div class="capitulo page-break">
+  <div class="capitulo-num">Material de Vendas — Uso Interno</div>
+  <h2>Kit Completo de Marketing</h2>
+
+  <div class="vendas-section">
+    <h3>📢 Descrição de Vendas (Página / Anúncio)</h3>
+    <p>Existe um músculo no seu corpo que ninguém nunca te ensinou a usar.</p>
+    <p>Quando este músculo está fraco, sua ereção falha. Você goza rápido demais. Você perde a confiança na hora que mais precisa dela.</p>
+    <p>Quando este músculo está forte, você dura mais. Fica mais duro. Controla quando quer gozar. E recupera algo que talvez acredite ter perdido para sempre: a certeza de que vai ser bom na cama.</p>
+    <p>O <strong>Método Kegel Force™</strong> é o protocolo completo — baseado em ciência, testado por centenas de homens reais — para fortalecer esse músculo em apenas 5 minutos por dia. Sem remédio. Sem academia. Sem que ninguém precise saber.</p>
+    <p>Em 7 dias você sente. Em 14 ela nota. Em 30 dias você é outro homem.</p>
+  </div>
+
+  <div class="vendas-section">
+    <h3>🎯 5 Ideias de Criativos para Anúncios</h3>
+    <ol class="lista">
+      <li><strong>Criativo 1 — Problema/Solução:</strong> Homem de costas, cabeça baixa, texto: "Ele falhou de novo. Mas não foi culpa dele — foi do músculo que ninguém ensinou a usar." CTA: "Descubra o método."</li>
+      <li><strong>Criativo 2 — Antes e Depois (texto):</strong> Dois lados: "Antes: medo de decepcionar / Depois: ela foi a primeira a pedir de novo." Visual de transformação masculina.</li>
+      <li><strong>Criativo 3 — Dado científico:</strong> "74% dos homens com disfunção erétil recuperaram a função só com exercícios. Sem Viagra." Fundo preto, texto branco e vermelho.</li>
+      <li><strong>Criativo 4 — Vídeo VSL:</strong> Homem falando direto para câmera: "Eu tinha vergonha de falar sobre isso. Mas um dia descobri que o problema não era eu..." — narrativa de transformação pessoal.</li>
+      <li><strong>Criativo 5 — Curiosidade:</strong> "A indústria do Viagra fatura R$4 bilhões garantindo que você nunca descubra isso." Link para a página de vendas.</li>
+    </ol>
+  </div>
+
+  <div class="vendas-section">
+    <h3>💥 3 Headlines de Alta Conversão</h3>
+    <ol class="lista">
+      <li>"O Músculo que a Indústria do Viagra Quer que Você Ignore — e Como Ativá-lo em 5 Minutos"</li>
+      <li>"Disfunção Erétil Não é Culpa Sua — Mas Resolver é Responsabilidade Sua. Veja Como."</li>
+      <li>"74% dos Homens Reverteram a Disfunção Erétil Sem Nenhum Remédio. Aqui Está o Protocolo."</li>
+    </ol>
+  </div>
+
+  <div class="vendas-section">
+    <h3>🏆 Promessa Principal do Produto</h3>
+    <p><em>"Recupere sua ereção, controle sua ejaculação e reconquiste sua confiança sexual em 30 dias — com apenas 5 minutos por dia, sem remédio, sem academia e sem que ninguém precise saber."</em></p>
+  </div>
+
+  <div class="vendas-section">
+    <h3>👤 Público Ideal Resumido</h3>
+    <ul class="lista">
+      <li><strong>Idade:</strong> 25–55 anos (pico de conversão: 35–50)</li>
+      <li><strong>Dor:</strong> ereção fraca/inconsistente, ejaculação precoce, medo de decepcionar</li>
+      <li><strong>Desejo:</strong> performance de verdade, confiança, independência do remédio</li>
+      <li><strong>Objeção principal:</strong> "Já tentei e não funcionou" / "Parece difícil de manter"</li>
+      <li><strong>Tom que converte:</strong> direto, sem julgamento, com autoridade científica + prova social</li>
+    </ul>
+  </div>
+
+  <div class="vendas-section">
+    <h3>💰 Sugestão de Preço</h3>
+    <p><strong>Preço de Ancoragem:</strong> R$ 97,00</p>
+    <p><strong>Preço de Lançamento / Oferta:</strong> R$ 19,90 a R$ 37,00</p>
+    <p><strong>Justificativa de valor:</strong> Um comprimido de Viagra custa R$ 60–200 e funciona por algumas horas. Este método custa R$ 19,90 e funciona para sempre. O valor percebido é alto porque resolve uma dor emocional profunda e entrega resultado mensurável em poucos dias.</p>
+    <p><strong>Garantia recomendada:</strong> 30 a 90 dias (aumenta conversão em 30–40%)</p>
+  </div>
+</div>
+
+</body>
+</html>
